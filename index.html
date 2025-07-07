@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Vihan Shahini</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg-dark: #0f2027;
@@ -65,6 +65,8 @@
       opacity: 0;
       transform: translateY(40px);
       transition: opacity 0.8s ease, transform 0.8s ease;
+      direction: ltr;
+      text-align: left;
     }
 
     section.visible {
@@ -110,17 +112,33 @@
       margin-bottom: 1rem;
     }
 
-    .toggle-theme {
+    /* دکمه‌های بالای صفحه کنار هم */
+    #top-buttons {
       position: fixed;
       top: 10px;
       right: 10px;
-      padding: 0.5rem 1rem;
+      display: flex;
+      gap: 10px;
+      z-index: 1000;
+    }
+
+    #persian-btn,
+    #toggle-theme-btn {
       background: var(--accent);
-      color: white;
       border: none;
+      color: white;
+      padding: 0.5rem 0.9rem;
       border-radius: 8px;
       cursor: pointer;
-      z-index: 999;
+      font-weight: 600;
+      font-size: 0.9rem;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+
+    #persian-btn:hover,
+    #toggle-theme-btn:hover {
+      background: #0077cc;
     }
 
     .teacher-btn {
@@ -132,12 +150,18 @@
       cursor: pointer;
       margin-right: 10px;
       margin-top: 10px;
+      user-select: none;
+      transition: box-shadow 0.3s ease;
     }
 
     .teacher-btn.special {
       background: linear-gradient(45deg, #ff416c, #ff4b2b);
       font-weight: bold;
       box-shadow: 0 0 15px #ff4b2b;
+    }
+
+    .teacher-btn:hover {
+      box-shadow: 0 0 15px #00c6ff;
     }
 
     .popup {
@@ -154,6 +178,12 @@
       z-index: 1000;
       text-align: center;
       display: none;
+      max-width: 90vw;
+      max-height: 80vh;
+      overflow-y: auto;
+      direction: ltr;
+      text-align: left;
+      user-select: none;
     }
 
     .popup.show {
@@ -168,25 +198,84 @@
       color: white;
       border-radius: 8px;
       cursor: pointer;
+      user-select: none;
     }
 
-    footer {
+    /* Parents special section */
+    #parents-section {
+      background: linear-gradient(135deg, #fff8dc, #ffd700, #fffacd);
+      border-radius: 25px;
+      box-shadow: 0 0 30px 8px rgba(255, 215, 0, 0.8);
+      padding: 3rem 2rem;
+      margin-bottom: 4rem;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
-      padding: 1rem;
-      color: #aaa;
-      font-size: 0.9rem;
-      margin-top: auto;
+      direction: ltr;
+      text-align: center;
+      user-select: none;
+    }
+
+    #parents-section h2 {
+      font-size: 2.2rem;
+      color: gold;
+      text-shadow:
+        0 0 10px #ffd700,
+        0 0 20px #ffec8b,
+        0 0 30px #ffdb58,
+        0 0 40px #ffd700;
+      margin-bottom: 1rem;
+      user-select: none;
+    }
+
+    #parents-section p {
+      font-size: 1.2rem;
+      color: #fff8dc;
+      max-width: 600px;
+      margin: auto;
+      text-align: center;
+      user-select: none;
+    }
+
+    .parent-btn {
+      background: linear-gradient(45deg, #ffd700, #ffec8b);
+      color: #8b7500;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow:
+        0 0 10px #ffd700,
+        0 0 20px #ffec8b,
+        0 0 30px #ffdb58;
+      transition: transform 0.3s ease;
+      margin-top: 1.5rem;
+      user-select: none;
+    }
+
+    .parent-btn:hover {
+      transform: scale(1.1);
+      box-shadow:
+        0 0 20px #ffd700,
+        0 0 30px #ffec8b,
+        0 0 40px #ffdb58;
     }
   </style>
 </head>
 <body>
-  <button class="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
-  <div class="popup" id="popup">
+  <div id="top-buttons">
+    <button id="persian-btn">فارسی</button>
+    <button id="toggle-theme-btn">Toggle Theme</button>
+  </div>
+
+  <div class="popup" id="popup" dir="ltr">
     <div id="popup-message"></div>
     <button onclick="closePopup()">Close</button>
   </div>
+
   <header>
-    <img src="https://avatars.githubusercontent.com/u/your_github_user_id" alt="Profile" class="profile-pic">
+    <img src="https://avatars.githubusercontent.com/u/your_github_user_id" alt="Profile" class="profile-pic" />
     <h1>Vihan Shahini</h1>
     <div class="typed" id="typed"></div>
   </header>
@@ -211,12 +300,21 @@
       <button class="teacher-btn" onclick="showPopup('Thank you Mr. Lotfi for mentoring and supporting me on every step of the way!')">Mr. Lotfi</button>
     </section>
 
+    <section class="reveal" id="parents-section">
+      <h2>My Parents 💎</h2>
+      <p>
+        I am deeply grateful to my parents who have always supported me, no matter what. Their love and belief in me is like a precious diamond, shining bright and guiding me through every challenge.
+      </p>
+      <button class="parent-btn" onclick="showPopup('Thank you Mom and Dad for your unconditional love and endless support! You are my shining diamonds.')">
+        💖 Thank You, Parents 💖
+      </button>
+    </section>
+
     <section class="reveal">
       <h2>Projects</h2>
       <ul>
-        <li><strong>Linear Algebra Translations:</strong> <a href="#">View Project</a></li>
-        <li><strong>Soil & Crop ML:</strong> <a href="#">Demo</a> | <a href="#">Code</a></li>
-        <li><strong>CO2 Air Modeling:</strong> <a href="#">GitHub Repo</a></li>
+        <li><strong>Linear Algebra Translations:</strong> Coming soon...</li>
+        <li><strong>Soil & Crop ML:</strong> <a href="https://github.com/ItzShahVihan/agriculture-ml-project" target="_blank">GitHub Repository</a></li>
       </ul>
     </section>
 
@@ -236,11 +334,6 @@
       <p>GitHub: <a href="https://github.com/ItzShahVihan" target="_blank">github.com/ItzShahVihan</a></p>
       <p>LinkedIn: <a href="https://linkedin.com/in/vihan-shahini-1a286b24b" target="_blank">linkedin.com/in/vihan-shahini-1a286b24b</a></p>
     </section>
-
-    <section class="reveal">
-      <h2>Download Resume</h2>
-      <p><a href="resume.pdf" download>📄 Click here to download my CV</a></p>
-    </section>
   </main>
 
   <footer>
@@ -248,15 +341,7 @@
   </footer>
 
   <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    });
-    document.querySelectorAll('.reveal').forEach(section => observer.observe(section));
-
+    // تایپ شدن متن زیر هدر
     const words = ["AI Enthusiast", "ML Explorer", "MIT Applicant", "Lifelong Learner"];
     let i = 0;
     let charIndex = 0;
@@ -265,33 +350,4 @@
 
     function typeEffect() {
       const current = words[i];
-      const visible = current.substring(0, charIndex);
-      typed.textContent = visible;
-
-      if (!isDeleting && charIndex < current.length) {
-        charIndex++;
-      } else if (isDeleting && charIndex > 0) {
-        charIndex--;
-      } else {
-        isDeleting = !isDeleting;
-        if (!isDeleting) i = (i + 1) % words.length;
-      }
-      setTimeout(typeEffect, isDeleting ? 50 : 120);
-    }
-    typeEffect();
-
-    function toggleTheme() {
-      document.body.classList.toggle("light-mode");
-    }
-
-    function showPopup(message) {
-      document.getElementById('popup-message').textContent = message;
-      document.getElementById('popup').classList.add('show');
-    }
-
-    function closePopup() {
-      document.getElementById('popup').classList.remove('show');
-    }
-  </script>
-</body>
-</html>
+      const
