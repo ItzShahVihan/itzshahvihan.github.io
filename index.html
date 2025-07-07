@@ -13,7 +13,6 @@
       --text-light: #222;
       --accent: #00c6ff;
     }
-
     body {
       margin: 0;
       font-family: 'Space Grotesk', sans-serif;
@@ -23,18 +22,16 @@
       flex-direction: column;
       min-height: 100vh;
       transition: background 0.5s, color 0.5s;
+      direction: ltr;
     }
-
     .light-mode {
       background: var(--bg-light);
       color: var(--text-light);
     }
-
     header {
       padding: 3rem 1rem;
       text-align: center;
     }
-
     header h1 {
       font-size: 3rem;
       margin-bottom: 0.5rem;
@@ -42,19 +39,17 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-
     header .typed {
       font-size: 1.2rem;
       color: #ccc;
       min-height: 1.5rem;
+      height: 1.5rem;
     }
-
     main {
       max-width: 900px;
       margin: auto;
       padding: 2rem;
     }
-
     section {
       margin-bottom: 4rem;
       padding: 2rem;
@@ -65,34 +60,27 @@
       opacity: 0;
       transform: translateY(40px);
       transition: opacity 0.8s ease, transform 0.8s ease;
-      direction: ltr;
       text-align: left;
     }
-
     section.visible {
       opacity: 1;
       transform: translateY(0);
     }
-
     h2 {
       color: var(--accent);
       font-size: 1.8rem;
       margin-bottom: 1rem;
     }
-
     ul {
       padding-left: 1.5rem;
     }
-
     a {
       color: var(--accent);
       text-decoration: none;
     }
-
     a:hover {
       text-decoration: underline;
     }
-
     .profile-pic {
       width: 120px;
       height: 120px;
@@ -102,17 +90,13 @@
       margin: 0 auto 1rem;
       display: block;
     }
-
     .timeline {
       border-left: 3px solid var(--accent);
       padding-left: 1rem;
     }
-
     .timeline li {
       margin-bottom: 1rem;
     }
-
-    /* دکمه‌های بالای صفحه کنار هم */
     #top-buttons {
       position: fixed;
       top: 10px;
@@ -121,7 +105,6 @@
       gap: 10px;
       z-index: 1000;
     }
-
     #persian-btn,
     #toggle-theme-btn {
       background: var(--accent);
@@ -135,12 +118,10 @@
       user-select: none;
       transition: background-color 0.3s ease;
     }
-
     #persian-btn:hover,
     #toggle-theme-btn:hover {
       background: #0077cc;
     }
-
     .teacher-btn {
       background: #0072ff;
       color: #fff;
@@ -153,17 +134,14 @@
       user-select: none;
       transition: box-shadow 0.3s ease;
     }
-
     .teacher-btn.special {
       background: linear-gradient(45deg, #ff416c, #ff4b2b);
       font-weight: bold;
       box-shadow: 0 0 15px #ff4b2b;
     }
-
     .teacher-btn:hover {
       box-shadow: 0 0 15px #00c6ff;
     }
-
     .popup {
       position: fixed;
       top: 50%;
@@ -181,15 +159,11 @@
       max-width: 90vw;
       max-height: 80vh;
       overflow-y: auto;
-      direction: ltr;
-      text-align: left;
       user-select: none;
     }
-
     .popup.show {
       display: block;
     }
-
     .popup button {
       margin-top: 1rem;
       padding: 0.5rem 1rem;
@@ -200,8 +174,6 @@
       cursor: pointer;
       user-select: none;
     }
-
-    /* Parents special section */
     #parents-section {
       background: linear-gradient(135deg, #fff8dc, #ffd700, #fffacd);
       border-radius: 25px;
@@ -210,11 +182,8 @@
       margin-bottom: 4rem;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
-      direction: ltr;
-      text-align: center;
       user-select: none;
     }
-
     #parents-section h2 {
       font-size: 2.2rem;
       color: gold;
@@ -226,7 +195,6 @@
       margin-bottom: 1rem;
       user-select: none;
     }
-
     #parents-section p {
       font-size: 1.2rem;
       color: #fff8dc;
@@ -235,7 +203,6 @@
       text-align: center;
       user-select: none;
     }
-
     .parent-btn {
       background: linear-gradient(45deg, #ffd700, #ffec8b);
       color: #8b7500;
@@ -253,7 +220,6 @@
       margin-top: 1.5rem;
       user-select: none;
     }
-
     .parent-btn:hover {
       transform: scale(1.1);
       box-shadow:
@@ -269,35 +235,35 @@
     <button id="toggle-theme-btn">Toggle Theme</button>
   </div>
 
-  <div class="popup" id="popup" dir="ltr">
+  <div class="popup" id="popup" role="alertdialog" aria-modal="true">
     <div id="popup-message"></div>
     <button onclick="closePopup()">Close</button>
   </div>
 
   <header>
     <img src="https://avatars.githubusercontent.com/u/your_github_user_id" alt="Profile" class="profile-pic" />
-    <h1>Vihan Shahini</h1>
+    <h1 id="header-name">Vihan Shahini</h1>
     <div class="typed" id="typed"></div>
   </header>
 
   <main>
-    <section class="reveal">
+    <section class="reveal" id="about-section">
       <h2>About Me</h2>
       <p>
         I’m a 16-year-old student from Iran with deep passion for math, machine learning, and real-world applications. I'm currently translating MIT's 18.06 Linear Algebra course into Persian and preparing for the AI Olympiad and MIT admission.
       </p>
     </section>
 
-    <section class="reveal">
+    <section class="reveal" id="life-ml-section">
       <h2>My Life & Start in ML</h2>
       <p>
         I began exploring programming at the age of 15, starting with Python. Soon after, I got deeply interested in machine learning and data-driven problem solving. With the guidance of inspiring teachers and a passion for learning, I committed myself to projects, competitions, and the dream of attending MIT.
       </p>
       <p>I want to thank these incredible teachers for helping shape my journey:</p>
-      <button class="teacher-btn special" onclick="showPopup('Thank you Mr. Eisaei for guiding me into the world of Python and Machine Learning! You were the spark that lit the fire.')">Mr. Eisaei 🌟</button>
-      <button class="teacher-btn" onclick="showPopup('Thank you Mr. Naghinasab for sharpening my English skills and confidence!')">Mr. Naghinasab</button>
-      <button class="teacher-btn" onclick="showPopup('Thank you Mr. Ghazlikor for deepening my understanding and love for Math!')">Mr. Ghazlikor</button>
-      <button class="teacher-btn" onclick="showPopup('Thank you Mr. Lotfi for mentoring and supporting me on every step of the way!')">Mr. Lotfi</button>
+      <button class="teacher-btn special" onclick="showPopup(currentLanguage==='fa' ? 'از آقای عیصایی بسیار سپاسگزارم که مرا در دنیای پایتون و یادگیری ماشین راهنمایی کردند! ایشان جرقه‌ای بودند که شعله‌ورم کردند.' : 'Thank you Mr. Eisaei for guiding me into the world of Python and Machine Learning! You were the spark that lit the fire.')">Mr. Eisaei 🌟</button>
+      <button class="teacher-btn" onclick="showPopup(currentLanguage==='fa' ? 'از آقای نغین‌آساب بابت تقویت مهارت‌ها و اعتماد به نفس در انگلیسی ممنونم!' : 'Thank you Mr. Naghinasab for sharpening my English skills and confidence!')">Mr. Naghinasab</button>
+      <button class="teacher-btn" onclick="showPopup(currentLanguage==='fa' ? 'از آقای غزلی‌کر برای عمیق‌تر شدن علاقه‌ام به ریاضی تشکر می‌کنم!' : 'Thank you Mr. Ghazlikor for deepening my understanding and love for Math!')">Mr. Ghazlikor</button>
+      <button class="teacher-btn" onclick="showPopup(currentLanguage==='fa' ? 'از آقای لطفی برای راهنمایی و حمایت بی‌وقفه‌اش سپاسگزارم!' : 'Thank you Mr. Lotfi for mentoring and supporting me on every step of the way!')">Mr. Lotfi</button>
     </section>
 
     <section class="reveal" id="parents-section">
@@ -305,49 +271,20 @@
       <p>
         I am deeply grateful to my parents who have always supported me, no matter what. Their love and belief in me is like a precious diamond, shining bright and guiding me through every challenge.
       </p>
-      <button class="parent-btn" onclick="showPopup('Thank you Mom and Dad for your unconditional love and endless support! You are my shining diamonds.')">
+      <button class="parent-btn" onclick="showPopup(currentLanguage==='fa' ? 'از مامان و بابام بابت عشق بی‌قید و شرط و حمایت بی‌پایانشان سپاسگزارم! شما الماس‌های درخشان من هستید.' : 'Thank you Mom and Dad for your unconditional love and endless support! You are my shining diamonds.')">
         💖 Thank You, Parents 💖
       </button>
     </section>
 
-    <section class="reveal">
+    <section class="reveal" id="projects-section">
       <h2>Projects</h2>
       <ul>
-        <li><strong>Linear Algebra Translations:</strong> Coming soon...</li>
-        <li><strong>Soil & Crop ML:</strong> <a href="https://github.com/ItzShahVihan/agriculture-ml-project" target="_blank">GitHub Repository</a></li>
+        <li><strong>Linear Algebra Translations:</strong> <span id="linear-algebra-text">Coming soon...</span></li>
+        <li><strong>Soil & Crop ML:</strong> <a href="https://github.com/ItzShahVihan/agriculture-ml-project" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
       </ul>
     </section>
 
-    <section class="reveal">
+    <section class="reveal" id="journey-section">
       <h2>My Journey</h2>
       <ul class="timeline">
-        <li><strong>2023:</strong> Started Python and ML</li>
-        <li><strong>2024:</strong> First ML project with real data</li>
-        <li><strong>2025:</strong> Translating MIT lectures</li>
-        <li><strong>2026:</strong> MIT? 🚀</li>
-      </ul>
-    </section>
-
-    <section class="reveal">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:itzvihan.dev@gmail.com">itzvihan.dev@gmail.com</a></p>
-      <p>GitHub: <a href="https://github.com/ItzShahVihan" target="_blank">github.com/ItzShahVihan</a></p>
-      <p>LinkedIn: <a href="https://linkedin.com/in/vihan-shahini-1a286b24b" target="_blank">linkedin.com/in/vihan-shahini-1a286b24b</a></p>
-    </section>
-  </main>
-
-  <footer>
-    &copy; 2025 Vihan Shahini — Built with ❤️ using GitHub Pages
-  </footer>
-
-  <script>
-    // تایپ شدن متن زیر هدر
-    const words = ["AI Enthusiast", "ML Explorer", "MIT Applicant", "Lifelong Learner"];
-    let i = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typed = document.getElementById("typed");
-
-    function typeEffect() {
-      const current = words[i];
-      const
+        <li><
