@@ -12,6 +12,7 @@
       --text-dark: #ffffff;
       --text-light: #222;
       --accent: #00c6ff;
+      --gold: #ffd700;
     }
     body {
       margin: 0;
@@ -43,20 +44,14 @@
       font-size: 4rem;
       font-weight: 700;
       color: #00c6ff;
-      text-shadow:
-        0 0 5px #00c6ff,
-        0 0 10px #00c6ff,
-        0 0 20px #00ffff,
-        0 0 30px #00ffff,
-        0 0 40px #00ffff,
-        0 0 55px #00ffff,
-        0 0 75px #00ffff;
       margin: 0;
+      text-shadow: none;
     }
     main {
       max-width: 900px;
       margin: auto;
       padding: 2rem;
+      flex-grow: 1;
     }
     section {
       margin-bottom: 4rem;
@@ -64,7 +59,7 @@
       background: rgba(255, 255, 255, 0.05);
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      backdrop-filter: blur(8px);
+      backdrop-filter: none;
       opacity: 0;
       transform: translateY(40px);
       transition: opacity 0.8s ease, transform 0.8s ease;
@@ -138,12 +133,11 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
+      background: #111;
       padding: 2rem;
       border-radius: 20px;
       color: white;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      box-shadow: 0 0 20px rgba(0,0,0,0.8);
       z-index: 1000;
       text-align: center;
       display: none;
@@ -159,7 +153,7 @@
       margin-top: 1rem;
       padding: 0.5rem 1rem;
       border: none;
-      background: #00c6ff;
+      background: var(--accent);
       color: white;
       border-radius: 8px;
       cursor: pointer;
@@ -168,28 +162,25 @@
     #parents-section {
       background: linear-gradient(135deg, #fff8dc, #ffd700, #fffacd);
       border-radius: 25px;
-      box-shadow: 0 0 30px 8px rgba(255, 215, 0, 0.8);
+      box-shadow: 0 0 10px 3px rgba(255, 215, 0, 0.6);
       padding: 3rem 2rem;
       margin-bottom: 4rem;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
       user-select: none;
-      color: inherit;
+      color: var(--gold);
+      text-shadow: none;
     }
     #parents-section h2 {
       font-size: 2.2rem;
-      color: gold;
-      text-shadow:
-        0 0 10px #ffd700,
-        0 0 20px #ffec8b,
-        0 0 30px #ffdb58,
-        0 0 40px #ffd700;
+      color: var(--gold);
       margin-bottom: 1rem;
       user-select: none;
+      text-shadow: none;
     }
     #parents-section p {
       font-size: 1.2rem;
-      color: #fff8dc;
+      color: var(--gold);
       max-width: 600px;
       margin: auto;
       text-align: center;
@@ -204,20 +195,45 @@
       padding: 0.75rem 1.5rem;
       border-radius: 12px;
       cursor: pointer;
-      box-shadow:
-        0 0 10px #ffd700,
-        0 0 20px #ffec8b,
-        0 0 30px #ffdb58;
+      box-shadow: none;
       transition: transform 0.3s ease;
       margin-top: 1.5rem;
       user-select: none;
     }
     .parent-btn:hover {
       transform: scale(1.1);
-      box-shadow:
-        0 0 20px #ffd700,
-        0 0 30px #ffec8b,
-        0 0 40px #ffdb58;
+      box-shadow: none;
+    }
+    /* Footer stats (like + visitor) */
+    #footer-stats {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: rgba(255,255,255,0.1);
+      color: var(--text-light);
+      user-select: none;
+    }
+    #footer-stats p {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+    }
+    #like-btn {
+      font-size: 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      user-select: none;
+      color: #e00;
+      transition: transform 0.2s ease;
+    }
+    #like-btn:hover {
+      color: #ff5555;
+    }
+    #footer-stats div {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      color: #444;
     }
   </style>
 </head>
@@ -291,14 +307,20 @@
     </section>
   </main>
 
-  <footer style="text-align:center; padding:1rem 0;">
+  <section id="footer-stats">
+    <p>Drop a ❤️ if you like this site!</p>
+    <button id="like-btn" aria-label="Like button">❤️</button>
+    <div>Likes: <span id="like-count">0</span> · Visitors: <span id="visitor-count">0</span></div>
+  </section>
+
+  <footer style="text-align:center; padding:1rem 0; color: var(--text-light);">
     &copy; 2025 Vihan Shahini — Built with ❤️ using GitHub Pages
   </footer>
 
   <script>
     // Reveal sections on scroll
     function revealSections() {
-      const reveals = document.querySelectorAll("section");
+      const reveals = document.querySelectorAll("section.reveal");
       const windowHeight = window.innerHeight;
       reveals.forEach(section => {
         const top = section.getBoundingClientRect().top;
@@ -328,7 +350,6 @@
 
     toggleBtn.addEventListener("click", () => {
       if (easterEggUnlocked) {
-        // If special theme is active, toggle back to light/dark mode
         if (document.body.classList.contains("special-theme")) {
           document.body.classList.remove("special-theme");
           document.body.classList.add("light-mode");
@@ -339,17 +360,61 @@
         }
         return;
       }
-
       toggleCount++;
       if (toggleCount === 5) {
         easterEggUnlocked = true;
         document.body.classList.add("special-theme");
         showPopup("🎉 Congrats! You unlocked a new cool theme! 🎉");
       } else {
-        // Normal toggle light mode
         document.body.classList.toggle("light-mode");
       }
     });
+
+    // Like & Visitor counts with CountAPI
+    const namespace = 'vihan-site';
+    const likeKey = 'likes';
+    const visitKey = 'visitors';
+
+    // Update visitor count
+    function updateVisitorCount() {
+      fetch(`https://api.countapi.xyz/hit/${namespace}/${visitKey}`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('visitor-count').textContent = data.value;
+        })
+        .catch(() => {
+          document.getElementById('visitor-count').textContent = 'N/A';
+        });
+    }
+
+    // Update like count
+    function updateLikeCount() {
+      fetch(`https://api.countapi.xyz/get/${namespace}/${likeKey}`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('like-count').textContent = data.value;
+        })
+        .catch(() => {
+          document.getElementById('like-count').textContent = 'N/A';
+        });
+    }
+
+    // Like button event
+    document.getElementById('like-btn').addEventListener('click', () => {
+      fetch(`https://api.countapi.xyz/update/${namespace}/${likeKey}?amount=1`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('like-count').textContent = data.value;
+          const btn = document.getElementById('like-btn');
+          btn.style.transform = 'scale(1.3)';
+          setTimeout(() => { btn.style.transform = 'scale(1)'; }, 150);
+        })
+        .catch(() => {});
+    });
+
+    // Initialize counts
+    updateVisitorCount();
+    updateLikeCount();
   </script>
 </body>
 </html>
