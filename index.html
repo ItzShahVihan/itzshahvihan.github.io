@@ -1,408 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Vihan Shahini</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --color-bg-light: #f9fafb;
-    --color-bg-dark: #121212;
-    --color-primary: #2563eb;
-    --color-primary-hover: #1e40af;
-    --color-text-light: #111827;
-    --color-text-dark: #e5e7eb;
-    --color-accent: #3b82f6;
-    --color-accent-hover: #2563eb;
-    --color-card-bg-light: #ffffff;
-    --color-card-bg-dark: #1e293b;
-    --color-classic-parents-bg: #e3e1dc;
-    --color-classic-parents-text: #4a463f;
-  }
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background-color: var(--color-bg-light);
-    color: var(--color-text-light);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  body.dark-mode {
-    background-color: var(--color-bg-dark);
-    color: var(--color-text-dark);
-  }
-  header {
-    text-align: center;
-    padding: 4rem 1rem 2rem;
-    background: var(--color-primary);
-    color: white;
-    box-shadow: 0 2px 8px rgb(37 99 235 / 0.4);
-    user-select: none;
-  }
-  header h1 {
-    font-weight: 700;
-    font-size: 3.5rem;
-    margin: 0;
-    letter-spacing: 0.05em;
-  }
-  main {
-    flex-grow: 1;
-    max-width: 900px;
-    margin: 2rem auto 3rem;
-    padding: 0 1rem;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-  }
-  section {
-    background-color: var(--color-card-bg-light);
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 6px 15px rgb(0 0 0 / 0.1);
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-    user-select: none;
-  }
-  body.dark-mode section {
-    background-color: var(--color-card-bg-dark);
-    box-shadow: 0 6px 20px rgb(0 0 0 / 0.5);
-  }
-  section.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  h2 {
-    font-weight: 700;
-    font-size: 2rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
-    color: var(--color-primary);
-    user-select: text;
-  }
-  ul {
-    list-style: disc inside;
-    padding-left: 1rem;
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-  ul li {
-    margin-bottom: 0.5rem;
-    user-select: text;
-  }
-  a {
-    color: var(--color-accent);
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  a:hover {
-    color: var(--color-accent-hover);
-    text-decoration: underline;
-  }
-  #top-buttons {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    z-index: 1000;
-    display: flex;
-    gap: 0.5rem;
-    user-select: none;
-  }
-  #toggle-theme-btn {
-    background-color: var(--color-primary);
-    border: none;
-    color: white;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 3px 8px rgb(37 99 235 / 0.4);
-    transition: background-color 0.3s ease;
-  }
-  #toggle-theme-btn:hover {
-    background-color: var(--color-primary-hover);
-  }
-  .teacher-btn {
-    background-color: var(--color-primary);
-    color: white;
-    border: none;
-    padding: 0.5rem 1.2rem;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 0.8rem;
-    margin-right: 0.7rem;
-    font-weight: 600;
-    box-shadow: 0 3px 10px rgb(37 99 235 / 0.5);
-    transition: background-color 0.3s ease;
-    user-select: none;
-  }
-  .teacher-btn.special {
-    background: linear-gradient(45deg, #ff416c, #ff4b2b);
-    box-shadow: 0 0 15px #ff4b2b;
-  }
-  .teacher-btn:hover {
-    background-color: var(--color-primary-hover);
-  }
-  .popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #222;
-    padding: 2rem 2.5rem;
-    border-radius: 16px;
-    color: #fff;
-    box-shadow: 0 0 25px rgba(0,0,0,0.9);
-    z-index: 1100;
-    text-align: center;
-    display: none;
-    max-width: 90vw;
-    max-height: 80vh;
-    overflow-y: auto;
-    user-select: none;
-  }
-  .popup.show {
-    display: block;
-  }
-  .popup button {
-    margin-top: 1.5rem;
-    padding: 0.6rem 1.4rem;
-    border: none;
-    background-color: var(--color-primary);
-    color: white;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 3px 10px rgb(37 99 235 / 0.5);
-    user-select: none;
-    transition: background-color 0.3s ease;
-  }
-  .popup button:hover {
-    background-color: var(--color-primary-hover);
-  }
-  #parents-section {
-    background-color: var(--color-classic-parents-bg);
-    border-radius: 20px;
-    padding: 3rem 2rem;
-    margin-bottom: 4rem;
-    text-align: center;
-    user-select: none;
-    color: var(--color-classic-parents-text);
-    box-shadow: inset 0 0 12px rgba(0,0,0,0.1);
-  }
-  #parents-section h2 {
-    font-size: 2.4rem;
-    margin-bottom: 1rem;
-    user-select: none;
-    font-family: 'Georgia', serif;
-    font-weight: 700;
-  }
-  #parents-section p {
-    font-size: 1.3rem;
-    max-width: 650px;
-    margin: auto;
-    user-select: none;
-    font-family: 'Georgia', serif;
-    font-style: italic;
-    color: var(--color-classic-parents-text);
-  }
-  .parent-btn {
-    margin-top: 1.8rem;
-    padding: 0.8rem 1.8rem;
-    font-size: 1.3rem;
-    font-weight: 700;
-    border-radius: 14px;
-    border: none;
-    cursor: pointer;
-    color: var(--color-classic-parents-text);
-    background: #d4cfc4;
-    box-shadow: none;
-    transition: transform 0.3s ease;
-    user-select: none;
-  }
-  .parent-btn:hover {
-    transform: scale(1.12);
-    background: #c0b9a3;
-  }
-  #footer-stats {
-    text-align: center;
-    padding: 2rem 1rem;
-    font-family: 'Inter', sans-serif;
-    background-color: var(--color-card-bg-light);
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-    user-select: none;
-    color: var(--color-text-light);
-    border-radius: 12px;
-    margin: 0 1rem 2rem;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  body.dark-mode #footer-stats {
-    background-color: var(--color-card-bg-dark);
-    color: var(--color-text-dark);
-    box-shadow: inset 0 0 10px rgba(255,255,255,0.1);
-  }
-  #footer-stats p {
-    font-size: 1.3rem;
-    margin-bottom: 0.6rem;
-    color: var(--color-primary);
-    user-select: none;
-  }
-  #like-btn {
-    font-size: 2.6rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-    user-select: none;
-    color: #e00;
-    transition: transform 0.2s ease, color 0.3s ease;
-  }
-  #like-btn:hover {
-    color: #ff5555;
-  }
-  #footer-stats div {
-    margin-top: 0.6rem;
-    font-size: 1.1rem;
-    color: #555;
-    user-select: none;
-  }
-  body.dark-mode #footer-stats div {
-    color: #bbb;
-  }
-  .timeline {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-    user-select: text;
-  }
-  .timeline li {
-    padding-left: 1rem;
-    border-left: 3px solid var(--color-primary);
-    margin-bottom: 1rem;
-    position: relative;
-  }
-  .timeline li::before {
-    content: "";
-    position: absolute;
-    left: -8px;
-    top: 6px;
-    width: 14px;
-    height: 14px;
-    background-color: var(--color-primary);
-    border-radius: 50%;
-  }
-  #contact-section {
-    background-color: var(--color-card-bg-light);
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 6px 15px rgb(0 0 0 / 0.1);
-    user-select: none;
-    transition: background-color 0.3s ease;
-  }
-  body.dark-mode #contact-section {
-    background-color: var(--color-card-bg-dark);
-    box-shadow: 0 6px 20px rgb(0 0 0 / 0.5);
-  }
-  #contact-section h2 {
-    color: var(--color-primary);
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-weight: 700;
-    font-size: 2rem;
-  }
-  #contact-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    justify-content: center;
-  }
-  .contact-card {
-    background-color: var(--color-bg-light);
-    color: var(--color-text-light);
-    padding: 1.2rem 1.6rem;
-    border-radius: 14px;
-    box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
-    width: 250px;
-    text-align: center;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    cursor: pointer;
-    user-select: text;
-  }
-  body.dark-mode .contact-card {
-    background-color: var(--color-card-bg-dark);
-    color: var(--color-text-dark);
-    box-shadow: 0 5px 15px rgb(0 0 0 / 0.6);
-  }
-  .contact-card:hover {
-    background-color: var(--color-primary);
-    color: white;
-    box-shadow: 0 0 15px var(--color-primary);
-  }
-  .contact-card a {
-    color: inherit;
-    text-decoration: none;
-    font-weight: 600;
-    user-select: text;
-  }
-  @media (max-width: 600px) {
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vihan Shahini</title>
+  <style>
+    :root {
+      --bg-dark: #0f2027;
+      --bg-light: #f5f5f5;
+      --text-dark: #ffffff;
+      --text-light: #222;
+      --accent: #00c6ff;
+      --gold: #ffd700;
+    }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(120deg, var(--bg-dark), #203a43, #2c5364);
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      transition: background 0.5s, color 0.5s;
+      direction: ltr;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .light-mode {
+      background: var(--bg-light);
+      color: var(--text-light);
+    }
+    /* New special theme */
+    .special-theme {
+      background: linear-gradient(135deg, #ff6a00, #ee0979);
+      color: #fff3f8;
+      font-family: "Georgia", serif;
+      font-style: normal;
+    }
+    header {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
     header h1 {
-      font-size: 2.5rem;
+      font-family: "Georgia", serif;
+      font-size: 3.5rem;
+      font-weight: normal;
+      color: #00c6ff;
+      margin: 0;
+      text-shadow: none;
     }
     main {
-      margin: 1rem auto 2rem;
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem 1rem;
+      flex-grow: 1;
     }
     section {
-      padding: 1.5rem 1rem;
-    }
-    #toggle-theme-btn {
-      padding: 0.4rem 0.8rem;
-      font-size: 0.85rem;
-    }
-    .teacher-btn {
-      padding: 0.4rem 0.8rem;
-      font-size: 0.9rem;
-      margin-top: 0.6rem;
-    }
-    #parents-section h2 {
-      font-size: 1.8rem;
-    }
-    #parents-section p {
+      margin-bottom: 4rem;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      backdrop-filter: none;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      text-align: left;
+      color: inherit;
       font-size: 1rem;
     }
-    .parent-btn {
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h2 {
+      color: var(--accent);
+      font-family: "Georgia", serif;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      font-weight: normal;
+    }
+    ul {
+      padding-left: 1.5rem;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    #top-buttons {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      gap: 10px;
+      z-index: 1000;
+    }
+    #toggle-theme-btn {
+      background: var(--accent);
+      border: none;
+      color: white;
+      padding: 0.5rem 0.9rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      user-select: none;
+      transition: background-color 0.3s ease;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+    #toggle-theme-btn:hover {
+      background: #0077cc;
+    }
+    .teacher-btn {
+      background: #0072ff;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-right: 10px;
+      margin-top: 10px;
+      user-select: none;
+      transition: box-shadow 0.3s ease;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 1rem;
+    }
+    .teacher-btn.special {
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      font-weight: bold;
+      box-shadow: 0 0 15px #ff4b2b;
+      font-family: "Georgia", serif;
+      font-size: 1rem;
+    }
+    .teacher-btn:hover {
+      box-shadow: 0 0 15px #00c6ff;
+    }
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #111;
+      padding: 2rem;
+      border-radius: 20px;
+      color: white;
+      box-shadow: 0 0 20px rgba(0,0,0,0.8);
+      z-index: 1000;
+      text-align: center;
+      display: none;
+      max-width: 90vw;
+      max-height: 80vh;
+      overflow-y: auto;
+      user-select: none;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .popup.show {
+      display: block;
+    }
+    .popup button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background: var(--accent);
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 1rem;
+    }
+    #parents-section {
+      background: linear-gradient(135deg, #fff8dc, #ffd700, #fffacd);
+      border-radius: 25px;
+      box-shadow: 0 0 10px 3px rgba(255, 215, 0, 0.6);
+      padding: 3rem 2rem;
+      margin-bottom: 4rem;
+      font-family: "Georgia", serif;
+      text-align: center;
+      user-select: none;
+      color: var(--gold);
+      text-shadow: none;
       font-size: 1.1rem;
-      padding: 0.6rem 1.2rem;
+    }
+    #parents-section h2 {
+      font-size: 2.2rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      user-select: none;
+      text-shadow: none;
+      font-family: "Georgia", serif;
+      font-weight: normal;
+    }
+    #parents-section p {
+      font-size: 1.2rem;
+      color: var(--gold);
+      max-width: 600px;
+      margin: auto;
+      text-align: center;
+      user-select: none;
+      font-family: "Georgia", serif;
+      font-weight: normal;
+    }
+    .parent-btn {
+      background: linear-gradient(45deg, #ffd700, #ffec8b);
+      color: #8b7500;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: none;
+      transition: transform 0.3s ease;
+      margin-top: 1.5rem;
+      user-select: none;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .parent-btn:hover {
+      transform: scale(1.1);
+      box-shadow: none;
+    }
+    /* Footer stats (like + visitor) */
+    #footer-stats {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: rgba(255,255,255,0.1);
+      color: var(--text-light);
+      user-select: none;
+      font-size: 1rem;
     }
     #footer-stats p {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+      font-family: "Georgia", serif;
+      font-weight: normal;
+    }
+    #like-btn {
+      font-size: 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      user-select: none;
+      color: #e00;
+      transition: transform 0.2s ease;
+    }
+    #like-btn:hover {
+      color: #ff5555;
     }
     #footer-stats div {
-      font-size: 0.95rem;
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      color: #444;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
-    #contact-list {
-      flex-direction: column;
-      gap: 1rem;
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+      main {
+        padding: 1rem;
+      }
+      section {
+        padding: 1.5rem;
+        font-size: 0.95rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      .teacher-btn, .parent-btn {
+        font-size: 1rem;
+        padding: 0.4rem 1rem;
+      }
+      #toggle-theme-btn {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.85rem;
+      }
     }
-    .contact-card {
-      width: 100%;
-    }
-  }
-</style>
+  </style>
 </head>
 <body>
   <div id="top-buttons">
-    <button id="toggle-theme-btn" aria-label="Toggle light and dark theme">Toggle Theme</button>
+    <button id="toggle-theme-btn">Toggle Theme</button>
   </div>
 
-  <div class="popup" id="popup" role="alertdialog" aria-modal="true" aria-live="polite">
+  <div class="popup" id="popup" role="alertdialog" aria-modal="true">
     <div id="popup-message"></div>
-    <button onclick="closePopup()" aria-label="Close popup">Close</button>
+    <button onclick="closePopup()">Close</button>
   </div>
 
   <header>
@@ -430,11 +320,11 @@
     </section>
 
     <section class="reveal" id="parents-section">
-      <h2>My Parents</h2>
+      <h2>My Parents 💎</h2>
       <p>
-        I am deeply grateful to my parents who have always supported me, no matter what. Their love and belief in me is a constant source of strength and motivation.
+        I am deeply grateful to my parents who have always supported me, no matter what. Their love and belief in me is like a precious diamond, shining bright and guiding me through every challenge.
       </p>
-      <button class="parent-btn" onclick="showPopup('Thank you Mom and Dad for your unconditional love and endless support! You are my shining stars.')">
+      <button class="parent-btn" onclick="showPopup('Thank you Mom and Dad for your unconditional love and endless support! You are my shining diamonds.')">
         💖 Thank You, Parents 💖
       </button>
     </section>
@@ -442,16 +332,109 @@
     <section class="reveal" id="projects-section">
       <h2>Projects</h2>
       <ul>
-        <li><strong>Linear Algebra Translations:</strong> Persian translations of MIT 18.06 lectures by Prof. Gilbert Strang (coming soon!).</li>
-        <li><strong>Agriculture ML Project:</strong> Predicting soil quality and crop yield using machine learning. <a href="https://github.com/ItzShahVihan/agriculture-ml-project" target="_blank" rel="noopener noreferrer">GitHub Repo</a></li>
+        <li><strong>Linear Algebra Translations:</strong> Coming soon...</li>
+        <li><strong>Soil & Crop ML:</strong> <a href="https://github.com/ItzShahVihan/agriculture-ml-project" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+      </ul>
+    </section>
+
+    <section class="reveal" id="journey-section">
+      <h2>My Journey</h2>
+      <ul class="timeline">
+        <li><strong>2023:</strong> Started Python and ML</li>
+        <li><strong>2024:</strong> First ML project with real data</li>
+        <li><strong>2025:</strong> Translating MIT lectures</li>
+        <li><strong>2026:</strong> MIT? 🚀</li>
       </ul>
     </section>
 
     <section class="reveal" id="contact-section">
-      <h2>Contact Me</h2>
-      <div id="contact-list">
-        <div class="contact-card" onclick="window.open('mailto:vihanshahini@yahoo.com', '_blank')">
-          📧 Email<br/>
-          <a href="mailto:vihanshahini@yahoo.com">vihanshahini@yahoo.com</a>
-        </div>
-        <div class="contact-card" onclick="window.open('https://github.com/ItzSh
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:itzvihan.dev@gmail.com">itzvihan.dev@gmail.com</a></p>
+      <p>GitHub: <a href="https://github.com/ItzShahVihan" target="_blank" rel="noopener noreferrer">github.com/ItzShahVihan</a></p>
+      <p>LinkedIn: <a href="https://linkedin.com/in/vihan-shahini-1a286b24b" target="_blank" rel="noopener noreferrer">linkedin.com/in/vihan-shahini-1a286b24b</a></p>
+    </section>
+  </main>
+
+  <section id="footer-stats">
+    <p>Drop a ❤️ if you like this site!</p>
+    <button id="like-btn" aria-label="Like button">❤️</button>
+    <div>Likes: <span id="like-count">0</span> · Visitors: <span id="visitor-count">0</span></div>
+  </section>
+
+  <footer style="text-align:center; padding:1rem 0; color: var(--text-light);">
+    &copy; 2025 Vihan Shahini — Built with ❤️ using GitHub Pages
+  </footer>
+
+  <script>
+    // Reveal sections on scroll
+    function revealSections() {
+      const reveals = document.querySelectorAll("section.reveal");
+      const windowHeight = window.innerHeight;
+      reveals.forEach(section => {
+        const top = section.getBoundingClientRect().top;
+        if (top < windowHeight - 100) {
+          section.classList.add("visible");
+        }
+      });
+    }
+    window.addEventListener("scroll", revealSections);
+    window.addEventListener("load", revealSections);
+
+    // Popup
+    const popup = document.getElementById("popup");
+    const popupMessage = document.getElementById("popup-message");
+    function showPopup(message) {
+      popupMessage.textContent = message;
+      popup.classList.add("show");
+    }
+    function closePopup() {
+      popup.classList.remove("show");
+    }
+
+    // Toggle theme with Easter Egg
+    const toggleBtn = document.getElementById("toggle-theme-btn");
+    let toggleCount = 0;
+    let easterEggUnlocked = false;
+
+    toggleBtn.addEventListener("click", () => {
+      if (easterEggUnlocked) {
+        if (document.body.classList.contains("special-theme")) {
+          document.body.classList.remove("special-theme");
+          document.body.classList.add("light-mode");
+        } else if (document.body.classList.contains("light-mode")) {
+          document.body.classList.remove("light-mode");
+        } else {
+          document.body.classList.add("light-mode");
+        }
+        return;
+      }
+      toggleCount++;
+      if (toggleCount === 5) {
+        easterEggUnlocked = true;
+        document.body.classList.add("special-theme");
+        showPopup("🎉 Congrats! You unlocked a new cool theme! 🎉");
+      } else {
+        document.body.classList.toggle("light-mode");
+      }
+    });
+
+    // Like & Visitor counts with CountAPI
+    const namespace = 'vihan-site';
+    const likeKey = 'likes';
+    const visitKey = 'visitors';
+
+    // Update visitor count
+    function updateVisitorCount() {
+      fetch(`https://api.countapi.xyz/hit/${namespace}/${visitKey}`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('visitor-count').textContent = data.value;
+        })
+        .catch(() => {
+          document.getElementById('visitor-count').textContent = 'N/A';
+        });
+    }
+
+    // Update like count
+    function updateLikeCount() {
+      fetch(`https://api.countapi.xyz/get/${namespace}/${
