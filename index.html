@@ -184,6 +184,65 @@
     #matrix-theme { background: linear-gradient(135deg, #000, #001a00); color: #00ff41; }
     #sunset-theme { background: linear-gradient(135deg, #ff6a00, #ee0979); color: #fff3f8; }
     
+    /* Language controls */
+    #language-controls {
+      position: fixed;
+      top: 60px;
+      right: 10px;
+      background: var(--card-bg);
+      padding: 8px;
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px var(--shadow);
+      z-index: 1000;
+      display: flex;
+      gap: 8px;
+    }
+    
+    .lang-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: var(--text-primary);
+      cursor: pointer;
+      font-weight: bold;
+      transition: var(--transition);
+    }
+    
+    .lang-btn.active {
+      background: var(--accent-primary);
+      color: white;
+      transform: scale(1.1);
+    }
+    
+    /* RTL Specific Styles */
+    [dir="rtl"] {
+      direction: rtl;
+    }
+    
+    [dir="rtl"] h2::after {
+      right: 0;
+      left: auto;
+    }
+    
+    [dir="rtl"] .timeline::before {
+      right: 6px;
+      left: auto;
+    }
+    
+    [dir="rtl"] .timeline-item::before {
+      right: 0;
+      left: auto;
+    }
+    
+    [dir="rtl"] li::before {
+      right: 0;
+      left: auto;
+      padding-right: 15px;
+    }
+    
     /* Header with animated gradient */
     header {
       text-align: center;
@@ -821,6 +880,15 @@
       box-shadow: 0 7px 15px rgba(0, 198, 255, 0.4);
     }
     
+    /* Language content */
+    .lang-content {
+      display: none;
+    }
+    
+    .lang-content.active {
+      display: block;
+    }
+    
     /* Responsive */
     @media (max-width: 768px) {
       header {
@@ -857,6 +925,10 @@
         width: 36px;
         height: 36px;
         font-size: 16px;
+      }
+      
+      #language-controls {
+        top: 50px;
       }
     }
     
@@ -912,6 +984,11 @@
     <button id="sunset-theme" class="theme-btn" title="Sunset"><i class="fas fa-sunset"></i></button>
   </div>
   
+  <div id="language-controls">
+    <button id="lang-en" class="lang-btn active">EN</button>
+    <button id="lang-fa" class="lang-btn">FA</button>
+  </div>
+  
   <div class="popup" id="popup">
     <div class="popup-content">
       <button class="popup-close" onclick="closePopup()">&times;</button>
@@ -923,202 +1000,405 @@
   <div id="particles-js"></div>
   <canvas class="code-rain"></canvas>
   
-  <header>
-    <div class="avatar">
-      <i class="fas fa-user-graduate"></i>
-    </div>
-    <h1>Vihan Shahini</h1>
-    <p class="tagline">Machine Learning Enthusiast | AI Olympiad Aspirant | Future MIT Student</p>
-    
-    <div class="social-links">
-      <a href="mailto:itzvihan.dev@gmail.com" class="social-icon" aria-label="Email">
-        <i class="fas fa-envelope"></i>
-      </a>
-      <a href="https://github.com/ItzShahVihan" target="_blank" class="social-icon" aria-label="GitHub">
-        <i class="fab fa-github"></i>
-      </a>
-      <a href="https://linkedin.com/in/vihan-shahini-1a286b24b" target="_blank" class="social-icon" aria-label="LinkedIn">
-        <i class="fab fa-linkedin-in"></i>
-      </a>
-      <a href="#" class="social-icon" aria-label="Resume">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-    </div>
-  </header>
-  
-  <main>
-    <div class="section-grid">
-      <section class="reveal" id="about-section">
-        <h2><i class="fas fa-user"></i> About Me</h2>
-        <p>
-          I'm a 16-year-old student from Iran with a deep passion for mathematics, machine learning, and real-world applications. My journey in programming began at age 15, and I've since dedicated myself to exploring the frontiers of AI.
-        </p>
-        <p>
-          Currently, I'm translating MIT's 18.06 Linear Algebra course into Persian to make this valuable knowledge accessible to Farsi-speaking students. I'm also preparing for the AI Olympiad and working toward my dream of attending MIT.
-        </p>
-        <div class="stats-container">
-          <div class="stat-card">
-            <div class="stat-value">16</div>
-            <div class="stat-label">Years Old</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value">2+</div>
-            <div class="stat-label">Years in ML</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value">MIT</div>
-            <div class="stat-label">Dream School</div>
-          </div>
-        </div>
-      </section>
-      
-      <section class="reveal" id="journey-section">
-        <h2><i class="fas fa-road"></i> My Journey</h2>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-year">2023</div>
-            <p>Started learning Python and discovered machine learning</p>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-year">2024</div>
-            <p>Completed first ML project with real agricultural data</p>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-year">2025</div>
-            <p>Began translating MIT Linear Algebra course to Persian</p>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-year">2026</div>
-            <p>MIT Admission? 🚀</p>
-          </div>
-        </div>
-      </section>
-    </div>
-    
-    <section class="reveal" id="teachers-section">
-      <h2><i class="fas fa-chalkboard-teacher"></i> My Inspiring Teachers</h2>
-      <p>
-        My journey wouldn't be possible without the guidance of these incredible mentors who have shaped my passion for learning:
-      </p>
-      <div class="button-group">
-        <button class="teacher-btn special" onclick="showPopup('Thank you Mr. Eisaei for guiding me into the world of Python and Machine Learning! You were the spark that lit the fire.')">
-          <i class="fas fa-star"></i> Mr. Eisaei 🌟
-        </button>
-        <button class="teacher-btn" onclick="showPopup('Thank you Mr. Naghinasab for sharpening my English skills and confidence!')">
-          <i class="fas fa-language"></i> Mr. Naghinasab
-        </button>
-        <button class="teacher-btn" onclick="showPopup('Thank you Mr. Ghazlikor for deepening my understanding and love for Math!')">
-          <i class="fas fa-calculator"></i> Mr. Ghazlikor
-        </button>
-        <button class="teacher-btn" onclick="showPopup('Thank you Mr. Lotfi for mentoring and supporting me on every step of the way!')">
-          <i class="fas fa-hands-helping"></i> Mr. Lotfi
-        </button>
+  <!-- English Content -->
+  <div class="lang-content active" id="en-content">
+    <header>
+      <div class="avatar">
+        <i class="fas fa-user-graduate"></i>
       </div>
-    </section>
-    
-    <div class="parent-section reveal">
-      <h2><i class="fas fa-gem"></i> My Parents 💎</h2>
-      <p>
-        I am deeply grateful to my parents who have always supported me, no matter what. Their love and belief in me is like a precious diamond, shining bright and guiding me through every challenge.
-      </p>
-      <button class="parent-btn" onclick="showPopup('Thank you Mom and Dad for your unconditional love and endless support! You are my shining diamonds.')">
-        <i class="fas fa-heart"></i> Thank You, Parents <i class="fas fa-heart"></i>
-      </button>
-    </div>
-    
-    <div class="section-grid">
-      <section class="reveal" id="projects-section">
-        <h2><i class="fas fa-code"></i> Projects</h2>
-        
-        <div class="project-card">
-          <div class="project-header">
-            <h3><i class="fas fa-language"></i> MIT Linear Algebra Translations</h3>
-          </div>
-          <div class="project-content">
-            <p>Translating MIT's 18.06 Linear Algebra course into Persian to make this valuable knowledge accessible to Farsi-speaking students.</p>
-            <p><strong>Status:</strong> In Progress</p>
-          </div>
-        </div>
-        
-        <div class="project-card">
-          <div class="project-header">
-            <h3><i class="fas fa-seedling"></i> Soil & Crop ML Project</h3>
-          </div>
-          <div class="project-content">
-            <p>A machine learning application that analyzes soil conditions and recommends optimal crops for cultivation based on environmental factors.</p>
-            <p><strong>Technologies:</strong> Python, Scikit-learn, Pandas, Matplotlib</p>
-            <a href="https://github.com/ItzShahVihan/agriculture-ml-project" target="_blank" class="teacher-btn">
-              <i class="fab fa-github"></i> View on GitHub
-            </a>
-          </div>
-        </div>
-      </section>
+      <h1>Vihan Shahini</h1>
+      <p class="tagline">Machine Learning Enthusiast | AI Olympiad Aspirant | Future MIT Student</p>
       
-      <section class="reveal" id="skills-section">
-        <h2><i class="fas fa-laptop-code"></i> Skills & Interests</h2>
-        <ul>
-          <li><strong>Machine Learning:</strong> Supervised learning, neural networks, data preprocessing</li>
-          <li><strong>Programming:</strong> Python (NumPy, Pandas, Scikit-learn, TensorFlow)</li>
-          <li><strong>Mathematics:</strong> Linear Algebra, Calculus, Probability</li>
-          <li><strong>Languages:</strong> Persian (Native), English (Fluent)</li>
-          <li><strong>Interests:</strong> AI Ethics, Computational Mathematics, Educational Technology</li>
-        </ul>
-        
-        <h3 style="margin-top: 1.5rem; color: var(--accent-secondary);">Currently Learning</h3>
-        <ul>
-          <li>Advanced Neural Network Architectures</li>
-          <li>Reinforcement Learning</li>
-          <li>MIT OpenCourseWare Curriculum</li>
-        </ul>
-      </section>
-    </div>
-    
-    <section class="reveal" id="contact-section">
-      <h2><i class="fas fa-envelope-open-text"></i> Contact Me</h2>
-      <p>Feel free to reach out for collaborations, questions, or just to say hello!</p>
-      
-      <div class="contact-cards">
-        <div class="contact-card">
+      <div class="social-links">
+        <a href="mailto:itzvihan.dev@gmail.com" class="social-icon" aria-label="Email">
           <i class="fas fa-envelope"></i>
-          <h3>Email</h3>
-          <a href="mailto:itzvihan.dev@gmail.com">itzvihan.dev@gmail.com</a>
-        </div>
-        
-        <div class="contact-card">
+        </a>
+        <a href="https://github.com/ItzShahVihan" target="_blank" class="social-icon" aria-label="GitHub">
           <i class="fab fa-github"></i>
-          <h3>GitHub</h3>
-          <a href="https://github.com/ItzShahVihan" target="_blank">ItzShahVihan</a>
-        </div>
-        
-        <div class="contact-card">
-          <i class="fab fa-linkedin"></i>
-          <h3>LinkedIn</h3>
-          <a href="https://linkedin.com/in/vihan-shahini-1a286b24b" target="_blank">Vihan Shahini</a>
-        </div>
+        </a>
+        <a href="https://linkedin.com/in/vihan-shahini-1a286b24b" target="_blank" class="social-icon" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="#" class="social-icon" aria-label="Resume">
+          <i class="fas fa-file-pdf"></i>
+        </a>
       </div>
-    </section>
-  </main>
-  
-  <footer>
-    <div class="footer-content">
-      <div class="like-container">
-        <button id="like-btn" aria-label="Like this website">❤️</button>
-        <p class="like-text">Drop a ❤️ if you like this site!</p>
-        <div class="stats">
-          <div class="stat">
-            <span class="stat-value" id="like-count">0</span>
-            <span class="stat-label">Likes</span>
+    </header>
+    
+    <main>
+      <div class="section-grid">
+        <section class="reveal" id="about-section">
+          <h2><i class="fas fa-user"></i> About Me</h2>
+          <p>
+            I'm a 16-year-old student from Iran with a deep passion for mathematics, machine learning, and real-world applications. My journey in programming began at age 15, and I've since dedicated myself to exploring the frontiers of AI.
+          </p>
+          <p>
+            Currently, I'm translating MIT's 18.06 Linear Algebra course into Persian to make this valuable knowledge accessible to Farsi-speaking students. I'm also preparing for the AI Olympiad and working toward my dream of attending MIT.
+          </p>
+          <div class="stats-container">
+            <div class="stat-card">
+              <div class="stat-value">16</div>
+              <div class="stat-label">Years Old</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">2+</div>
+              <div class="stat-label">Years in ML</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">MIT</div>
+              <div class="stat-label">Dream School</div>
+            </div>
           </div>
-          <div class="stat">
-            <span class="stat-value" id="visitor-count">0</span>
-            <span class="stat-label">Visitors</span>
+        </section>
+        
+        <section class="reveal" id="journey-section">
+          <h2><i class="fas fa-road"></i> My Journey</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-year">2023</div>
+              <p>Started learning Python and discovered machine learning</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2024</div>
+              <p>Completed first ML project with real agricultural data</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2025</div>
+              <p>Began translating MIT Linear Algebra course to Persian</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2026</div>
+              <p>MIT Admission? 🚀</p>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
       
-      <p class="copyright">© 2025 Vihan Shahini — Built with ❤️ using HTML, CSS & JavaScript</p>
-    </div>
-  </footer>
+      <section class="reveal" id="teachers-section">
+        <h2><i class="fas fa-chalkboard-teacher"></i> My Inspiring Teachers</h2>
+        <p>
+          My journey wouldn't be possible without the guidance of these incredible mentors who have shaped my passion for learning:
+        </p>
+        <div class="button-group">
+          <button class="teacher-btn special" onclick="showPopup('Thank you Mr. Eisaei for guiding me into the world of Python and Machine Learning! You were the spark that lit the fire.')">
+            <i class="fas fa-star"></i> Mr. Eisaei 🌟
+          </button>
+          <button class="teacher-btn" onclick="showPopup('Thank you Mr. Naghinasab for sharpening my English skills and confidence!')">
+            <i class="fas fa-language"></i> Mr. Naghinasab
+          </button>
+          <button class="teacher-btn" onclick="showPopup('Thank you Mr. Ghazlikor for deepening my understanding and love for Math!')">
+            <i class="fas fa-calculator"></i> Mr. Ghazlikor
+          </button>
+          <button class="teacher-btn" onclick="showPopup('Thank you Mr. Lotfi for mentoring and supporting me on every step of the way!')">
+            <i class="fas fa-hands-helping"></i> Mr. Lotfi
+          </button>
+        </div>
+      </section>
+      
+      <div class="parent-section reveal">
+        <h2><i class="fas fa-gem"></i> My Parents 💎</h2>
+        <p>
+          I am deeply grateful to my parents who have always supported me, no matter what. Their love and belief in me is like a precious diamond, shining bright and guiding me through every challenge.
+        </p>
+        <button class="parent-btn" onclick="showPopup('Thank you Mom and Dad for your unconditional love and endless support! You are my shining diamonds.')">
+          <i class="fas fa-heart"></i> Thank You, Parents <i class="fas fa-heart"></i>
+        </button>
+      </div>
+      
+      <div class="section-grid">
+        <section class="reveal" id="projects-section">
+          <h2><i class="fas fa-code"></i> Projects</h2>
+          
+          <div class="project-card">
+            <div class="project-header">
+              <h3><i class="fas fa-language"></i> MIT Linear Algebra Translations</h3>
+            </div>
+            <div class="project-content">
+              <p>Translating MIT's 18.06 Linear Algebra course into Persian to make this valuable knowledge accessible to Farsi-speaking students.</p>
+              <p><strong>Status:</strong> In Progress</p>
+            </div>
+          </div>
+          
+          <div class="project-card">
+            <div class="project-header">
+              <h3><i class="fas fa-seedling"></i> Soil & Crop ML Project</h3>
+            </div>
+            <div class="project-content">
+              <p>A machine learning application that analyzes soil conditions and recommends optimal crops for cultivation based on environmental factors.</p>
+              <p><strong>Technologies:</strong> Python, Scikit-learn, Pandas, Matplotlib</p>
+              <a href="https://github.com/ItzShahVihan/agriculture-ml-project" target="_blank" class="teacher-btn">
+                <i class="fab fa-github"></i> View on GitHub
+              </a>
+            </div>
+          </div>
+        </section>
+        
+        <section class="reveal" id="skills-section">
+          <h2><i class="fas fa-laptop-code"></i> Skills & Interests</h2>
+          <ul>
+            <li><strong>Machine Learning:</strong> Supervised learning, neural networks, data preprocessing</li>
+            <li><strong>Programming:</strong> Python (NumPy, Pandas, Scikit-learn, TensorFlow)</li>
+            <li><strong>Mathematics:</strong> Linear Algebra, Calculus, Probability</li>
+            <li><strong>Languages:</strong> Persian (Native), English (Fluent)</li>
+            <li><strong>Interests:</strong> AI Ethics, Computational Mathematics, Educational Technology</li>
+          </ul>
+          
+          <h3 style="margin-top: 1.5rem; color: var(--accent-secondary);">Currently Learning</h3>
+          <ul>
+            <li>Advanced Neural Network Architectures</li>
+            <li>Reinforcement Learning</li>
+            <li>MIT OpenCourseWare Curriculum</li>
+          </ul>
+        </section>
+      </div>
+      
+      <section class="reveal" id="contact-section">
+        <h2><i class="fas fa-envelope-open-text"></i> Contact Me</h2>
+        <p>Feel free to reach out for collaborations, questions, or just to say hello!</p>
+        
+        <div class="contact-cards">
+          <div class="contact-card">
+            <i class="fas fa-envelope"></i>
+            <h3>Email</h3>
+            <a href="mailto:itzvihan.dev@gmail.com">itzvihan.dev@gmail.com</a>
+          </div>
+          
+          <div class="contact-card">
+            <i class="fab fa-github"></i>
+            <h3>GitHub</h3>
+            <a href="https://github.com/ItzShahVihan" target="_blank">ItzShahVihan</a>
+          </div>
+          
+          <div class="contact-card">
+            <i class="fab fa-linkedin"></i>
+            <h3>LinkedIn</h3>
+            <a href="https://linkedin.com/in/vihan-shahini-1a286b24b" target="_blank">Vihan Shahini</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    
+    <footer>
+      <div class="footer-content">
+        <div class="like-container">
+          <button id="like-btn" aria-label="Like this website">❤️</button>
+          <p class="like-text">Drop a ❤️ if you like this site!</p>
+          <div class="stats">
+            <div class="stat">
+              <span class="stat-value" id="like-count">0</span>
+              <span class="stat-label">Likes</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="visitor-count">0</span>
+              <span class="stat-label">Visitors</span>
+            </div>
+          </div>
+        </div>
+        
+        <p class="copyright">© 2025 Vihan Shahini — Built with ❤️ using HTML, CSS & JavaScript</p>
+      </div>
+    </footer>
+  </div>
+  
+  <!-- Persian Content -->
+  <div class="lang-content" id="fa-content" style="direction:rtl">
+    <header>
+      <div class="avatar">
+        <i class="fas fa-user-graduate"></i>
+      </div>
+      <h1>ویهان شاهینی</h1>
+      <p class="tagline">علاقه‌مند به یادگیری ماشین | المپیاد هوش مصنوعی | دانشجوی آینده MIT</p>
+      
+      <div class="social-links">
+        <a href="mailto:itzvihan.dev@gmail.com" class="social-icon" aria-label="ایمیل">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://github.com/ItzShahVihan" target="_blank" class="social-icon" aria-label="گیتهاب">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://linkedin.com/in/vihan-shahini-1a286b24b" target="_blank" class="social-icon" aria-label="لینکدین">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="#" class="social-icon" aria-label="رزومه">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+      </div>
+    </header>
+    
+    <main>
+      <div class="section-grid">
+        <section class="reveal" id="about-section-fa">
+          <h2><i class="fas fa-user"></i> درباره من</h2>
+          <p>
+            من یک دانش‌آموز ۱۶ ساله ایرانی هستم که علاقه شدیدی به ریاضیات، یادگیری ماشین و کاربردهای عملی آن دارم. سفر برنامه‌نویسی من از ۱۵ سالگی آغاز شد و از آن زمان خود را وقف کشف مرزهای هوش مصنوعی کرده‌ام.
+          </p>
+          <p>
+            در حال حاضر، در حال ترجمه درس جبر خطی 18.06 دانشگاه MIT به زبان فارسی هستم تا این دانش ارزشمند را در دسترس دانشجویان فارسی زبان قرار دهم. همچنین برای المپیاد هوش مصنوعی آماده می‌شوم و به سوی رویای تحصیل در MIT گام برمی‌دارم.
+          </p>
+          <div class="stats-container">
+            <div class="stat-card">
+              <div class="stat-value">۱۶</div>
+              <div class="stat-label">سن</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">۲+</div>
+              <div class="stat-label">سال در ML</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">MIT</div>
+              <div class="stat-label">دانشگاه رویایی</div>
+            </div>
+          </div>
+        </section>
+        
+        <section class="reveal" id="journey-section-fa">
+          <h2><i class="fas fa-road"></i> سفر من</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-year">۲۰۲۳</div>
+              <p>شروع یادگیری پایتون و کشف یادگیری ماشین</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">۲۰۲۴</div>
+              <p>تکمیل اولین پروژه ML با داده‌های واقعی کشاورزی</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">۲۰۲۵</div>
+              <p>شروع ترجمه درس جبر خطی MIT به فارسی</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">۲۰۲۶</div>
+              <p>پذیرش در MIT؟ 🚀</p>
+            </div>
+          </div>
+        </section>
+      </div>
+      
+      <section class="reveal" id="teachers-section-fa">
+        <h2><i class="fas fa-chalkboard-teacher"></i> معلمان الهام‌بخش من</h2>
+        <p>
+          سفر من بدون راهنمایی این مربیان فوق‌العاده که اشتیاق من به یادگیری را شکل داده‌اند، ممکن نبود:
+        </p>
+        <div class="button-group">
+          <button class="teacher-btn special" onclick="showPopup('با تشکر از آقای عیسایی برای راهنمایی من به دنیای پایتون و یادگیری ماشین! شما جرقه‌ای بودید که آتش را روشن کرد.')">
+            <i class="fas fa-star"></i> آقای عیسایی 🌟
+          </button>
+          <button class="teacher-btn" onclick="showPopup('با تشکر از آقای نقینسب برای تقویت مهارت‌های زبان انگلیسی و اعتماد به نفس من!')">
+            <i class="fas fa-language"></i> آقای نقینسب
+          </button>
+          <button class="teacher-btn" onclick="showPopup('با تشکر از آقای غضلی کر برای تعمیق درک و علاقه من به ریاضیات!')">
+            <i class="fas fa-calculator"></i> آقای غضلی کر
+          </button>
+          <button class="teacher-btn" onclick="showPopup('با تشکر از آقای لطفی برای راهنمایی و حمایت از من در هر مرحله از راه!')">
+            <i class="fas fa-hands-helping"></i> آقای لطفی
+          </button>
+        </div>
+      </section>
+      
+      <div class="parent-section reveal">
+        <h2><i class="fas fa-gem"></i> والدین من 💎</h2>
+        <p>
+          من عمیقاً از والدینم سپاسگزارم که همیشه از من حمایت کرده‌اند، مهم نیست چه اتفاقی بیفتد. عشق و باور آنها به من مانند الماسی گرانبها است که درخشان است و مرا در هر چالشی هدایت می‌کند.
+        </p>
+        <button class="parent-btn" onclick="showPopup('با تشکر از مادر و پدرم برای عشق بی‌قید و شرط و حمایت بی‌پایان شما! شما الماس‌های درخشان من هستید.')">
+          <i class="fas fa-heart"></i> با تشکر از والدین <i class="fas fa-heart"></i>
+        </button>
+      </div>
+      
+      <div class="section-grid">
+        <section class="reveal" id="projects-section-fa">
+          <h2><i class="fas fa-code"></i> پروژه‌ها</h2>
+          
+          <div class="project-card">
+            <div class="project-header">
+              <h3><i class="fas fa-language"></i> ترجمه جبر خطی MIT</h3>
+            </div>
+            <div class="project-content">
+              <p>ترجمه درس جبر خطی 18.06 دانشگاه MIT به زبان فارسی برای قرار دادن این دانش ارزشمند در دسترس دانشجویان فارسی زبان.</p>
+              <p><strong>وضعیت:</strong> در حال انجام</p>
+            </div>
+          </div>
+          
+          <div class="project-card">
+            <div class="project-header">
+              <h3><i class="fas fa-seedling"></i> پروژه ML خاک و محصول</h3>
+            </div>
+            <div class="project-content">
+              <p>یک برنامه یادگیری ماشین که شرایط خاک را تحلیل می‌کند و بر اساس عوامل محیطی، محصولات بهینه برای کشت را توصیه می‌کند.</p>
+              <p><strong>فناوری‌ها:</strong> پایتون، Scikit-learn، Pandas، Matplotlib</p>
+              <a href="https://github.com/ItzShahVihan/agriculture-ml-project" target="_blank" class="teacher-btn">
+                <i class="fab fa-github"></i> مشاهده در گیتهاب
+              </a>
+            </div>
+          </div>
+        </section>
+        
+        <section class="reveal" id="skills-section-fa">
+          <h2><i class="fas fa-laptop-code"></i> مهارت‌ها و علایق</h2>
+          <ul>
+            <li><strong>یادگیری ماشین:</strong> یادگیری نظارت شده، شبکه‌های عصبی، پیش‌پردازش داده</li>
+            <li><strong>برنامه‌نویسی:</strong> پایتون (NumPy, Pandas, Scikit-learn, TensorFlow)</li>
+            <li><strong>ریاضیات:</strong> جبر خطی، حسابان، احتمال</li>
+            <li><strong>زبان‌ها:</strong> فارسی (زبان مادری)، انگلیسی (مسلط)</li>
+            <li><strong>علایق:</strong> اخلاق هوش مصنوعی، ریاضیات محاسباتی، فناوری آموزشی</li>
+          </ul>
+          
+          <h3 style="margin-top: 1.5rem; color: var(--accent-secondary);">در حال یادگیری</h3>
+          <ul>
+            <li>معماری‌های پیشرفته شبکه عصبی</li>
+            <li>یادگیری تقویتی</li>
+            <li>برنامه درسی MIT OpenCourseWare</li>
+          </ul>
+        </section>
+      </div>
+      
+      <section class="reveal" id="contact-section-fa">
+        <h2><i class="fas fa-envelope-open-text"></i> تماس با من</h2>
+        <p>برای همکاری، سوالات یا فقط گفتن سلام، آزادانه با من تماس بگیرید!</p>
+        
+        <div class="contact-cards">
+          <div class="contact-card">
+            <i class="fas fa-envelope"></i>
+            <h3>ایمیل</h3>
+            <a href="mailto:itzvihan.dev@gmail.com">itzvihan.dev@gmail.com</a>
+          </div>
+          
+          <div class="contact-card">
+            <i class="fab fa-github"></i>
+            <h3>گیتهاب</h3>
+            <a href="https://github.com/ItzShahVihan" target="_blank">ItzShahVihan</a>
+          </div>
+          
+          <div class="contact-card">
+            <i class="fab fa-linkedin"></i>
+            <h3>لینکدین</h3>
+            <a href="https://linkedin.com/in/vihan-shahini-1a286b24b" target="_blank">Vihan Shahini</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    
+    <footer>
+      <div class="footer-content">
+        <div class="like-container">
+          <button id="like-btn-fa" aria-label="لایک این سایت">❤️</button>
+          <p class="like-text">اگر این سایت را دوست دارید، لایک کنید!</p>
+          <div class="stats">
+            <div class="stat">
+              <span class="stat-value" id="like-count-fa">0</span>
+              <span class="stat-label">لایک‌ها</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="visitor-count-fa">0</span>
+              <span class="stat-label">بازدیدکنندگان</span>
+            </div>
+          </div>
+        </div>
+        
+        <p class="copyright">© ۲۰۲۵ ویهان شاهینی — ساخته شده با ❤️ با استفاده از HTML, CSS و JavaScript</p>
+      </div>
+    </footer>
+  </div>
   
   <button id="back-to-top" aria-label="Back to top">
     <i class="fas fa-arrow-up"></i>
@@ -1246,6 +1526,33 @@
       }
     });
     
+    // Language Switching
+    document.getElementById('lang-en').addEventListener('click', function() {
+      document.getElementById('en-content').classList.add('active');
+      document.getElementById('fa-content').classList.remove('active');
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      this.classList.add('active');
+      document.body.style.direction = 'ltr';
+      localStorage.setItem('language', 'en');
+    });
+    
+    document.getElementById('lang-fa').addEventListener('click', function() {
+      document.getElementById('en-content').classList.remove('active');
+      document.getElementById('fa-content').classList.add('active');
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      this.classList.add('active');
+      document.body.style.direction = 'rtl';
+      localStorage.setItem('language', 'fa');
+    });
+    
+    // Set language from localStorage or default
+    const savedLanguage = localStorage.getItem('language') || 'en';
+    if (savedLanguage === 'fa') {
+      document.getElementById('lang-fa').click();
+    } else {
+      document.getElementById('lang-en').click();
+    }
+    
     // Back to top button
     const backToTopBtn = document.getElementById('back-to-top');
     
@@ -1311,9 +1618,11 @@
         .then(res => res.json())
         .then(data => {
           document.getElementById('visitor-count').textContent = data.value;
+          document.getElementById('visitor-count-fa').textContent = data.value;
         })
         .catch(() => {
           document.getElementById('visitor-count').textContent = 'N/A';
+          document.getElementById('visitor-count-fa').textContent = 'N/A';
         });
     }
     
@@ -1323,9 +1632,11 @@
         .then(res => res.json())
         .then(data => {
           document.getElementById('like-count').textContent = data.value;
+          document.getElementById('like-count-fa').textContent = data.value;
         })
         .catch(() => {
           document.getElementById('like-count').textContent = 'N/A';
+          document.getElementById('like-count-fa').textContent = 'N/A';
         });
     }
     
@@ -1341,6 +1652,24 @@
         .then(res => res.json())
         .then(data => {
           document.getElementById('like-count').textContent = data.value;
+          document.getElementById('like-count-fa').textContent = data.value;
+        })
+        .catch(() => {});
+    });
+    
+    // Persian like button event
+    document.getElementById('like-btn-fa').addEventListener('click', () => {
+      const btn = document.getElementById('like-btn-fa');
+      
+      // Animation effect
+      btn.classList.add('liked');
+      setTimeout(() => btn.classList.remove('liked'), 600);
+      
+      fetch(`https://api.countapi.xyz/update/${namespace}/${likeKey}?amount=1`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('like-count').textContent = data.value;
+          document.getElementById('like-count-fa').textContent = data.value;
         })
         .catch(() => {});
     });
