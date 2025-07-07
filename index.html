@@ -17,7 +17,8 @@
       --color-accent-hover: #2563eb;
       --color-card-bg-light: #ffffff;
       --color-card-bg-dark: #1e293b;
-      --color-gold: #d4af37;
+      --color-classic-parents-bg: #e3e1dc;
+      --color-classic-parents-text: #4a463f;
     }
     /* Reset */
     *, *::before, *::after {
@@ -43,13 +44,13 @@
       background: var(--color-primary);
       color: white;
       box-shadow: 0 2px 8px rgb(37 99 235 / 0.4);
+      user-select: none;
     }
     header h1 {
       font-weight: 700;
       font-size: 3.5rem;
       margin: 0;
       letter-spacing: 0.05em;
-      user-select: none;
     }
     main {
       flex-grow: 1;
@@ -187,27 +188,32 @@
     .popup button:hover {
       background-color: var(--color-primary-hover);
     }
+    /* Parents section classic style */
     #parents-section {
-      background: linear-gradient(135deg, #fff8dc, #ffd700, #fffacd);
+      background-color: var(--color-classic-parents-bg);
       border-radius: 20px;
       padding: 3rem 2rem;
       margin-bottom: 4rem;
       text-align: center;
       user-select: none;
-      color: var(--color-gold);
-      box-shadow: 0 0 12px 4px rgba(212,175,55,0.7);
+      color: var(--color-classic-parents-text);
+      box-shadow: inset 0 0 12px rgba(0,0,0,0.1);
     }
     #parents-section h2 {
       font-size: 2.4rem;
       margin-bottom: 1rem;
       user-select: none;
-      text-shadow: 0 0 8px rgba(212,175,55,0.9);
+      font-family: 'Georgia', serif;
+      font-weight: 700;
     }
     #parents-section p {
       font-size: 1.3rem;
       max-width: 650px;
       margin: auto;
       user-select: none;
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      color: var(--color-classic-parents-text);
     }
     .parent-btn {
       margin-top: 1.8rem;
@@ -217,14 +223,15 @@
       border-radius: 14px;
       border: none;
       cursor: pointer;
-      color: #8b7500;
-      background: linear-gradient(45deg, #ffd700, #ffec8b);
+      color: var(--color-classic-parents-text);
+      background: #d4cfc4;
       box-shadow: none;
       transition: transform 0.3s ease;
       user-select: none;
     }
     .parent-btn:hover {
       transform: scale(1.12);
+      background: #c0b9a3;
     }
     /* Footer Stats */
     #footer-stats {
@@ -294,6 +301,60 @@
       background-color: var(--color-primary);
       border-radius: 50%;
     }
+    /* Contact Links Section */
+    #contact-section {
+      background-color: var(--color-card-bg-light);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 6px 15px rgb(0 0 0 / 0.1);
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    body.dark-mode #contact-section {
+      background-color: var(--color-card-bg-dark);
+      box-shadow: 0 6px 20px rgb(0 0 0 / 0.5);
+    }
+    #contact-section h2 {
+      color: var(--color-primary);
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      font-size: 2rem;
+    }
+    #contact-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+    .contact-card {
+      background-color: var(--color-bg-light);
+      color: var(--color-text-light);
+      padding: 1.2rem 1.6rem;
+      border-radius: 14px;
+      box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
+      width: 250px;
+      text-align: center;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      cursor: pointer;
+      user-select: text;
+    }
+    body.dark-mode .contact-card {
+      background-color: var(--color-card-bg-dark);
+      color: var(--color-text-dark);
+      box-shadow: 0 5px 15px rgb(0 0 0 / 0.6);
+    }
+    .contact-card:hover {
+      background-color: var(--color-primary);
+      color: white;
+      box-shadow: 0 0 15px var(--color-primary);
+    }
+    .contact-card a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: 600;
+      user-select: text;
+    }
     /* Responsive */
     @media (max-width: 600px) {
       header h1 {
@@ -329,6 +390,13 @@
       }
       #footer-stats div {
         font-size: 0.95rem;
+      }
+      #contact-list {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .contact-card {
+        width: 100%;
       }
     }
   </style>
@@ -368,11 +436,11 @@
     </section>
 
     <section class="reveal" id="parents-section">
-      <h2>My Parents 💎</h2>
+      <h2>My Parents</h2>
       <p>
-        I am deeply grateful to my parents who have always supported me, no matter what. Their love and belief in me is like a precious diamond, shining bright and guiding me through every challenge.
+        I am deeply grateful to my parents who have always supported me, no matter what. Their love and belief in me is a constant source of strength and motivation.
       </p>
-      <button class="parent-btn" onclick="showPopup('Thank you Mom and Dad for your unconditional love and endless support! You are my shining diamonds.')">
+      <button class="parent-btn" onclick="showPopup('Thank you Mom and Dad for your unconditional love and endless support! You are my shining stars.')">
         💖 Thank You, Parents 💖
       </button>
     </section>
@@ -384,74 +452,14 @@
         <li><strong>Agriculture ML Project:</strong> Predicting soil quality and crop yield using machine learning. <a href="https://github.com/ItzShahVihan/agriculture-ml-project" target="_blank" rel="noopener noreferrer">GitHub Repo</a></li>
       </ul>
     </section>
-  </main>
 
-  <footer id="footer-stats">
-    <p>Drop a heart if you like my work! <button id="like-btn" aria-label="Like button">❤️</button></p>
-    <div id="like-count">Hearts: 0</div>
-    <div id="visit-count">Visitors: 0</div>
-  </footer>
-
-  <script>
-    // Theme toggle
-    const toggleBtn = document.getElementById('toggle-theme-btn');
-    toggleBtn.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-    });
-
-    // Reveal animation on scroll
-    function revealSections() {
-      const reveals = document.querySelectorAll('.reveal');
-      const windowHeight = window.innerHeight;
-      reveals.forEach(el => {
-        const elementTop = el.getBoundingClientRect().top;
-        if (elementTop < windowHeight - 50) {
-          el.classList.add('visible');
-        }
-      });
-    }
-    window.addEventListener('scroll', revealSections);
-    window.addEventListener('load', revealSections);
-
-    // Popup logic
-    const popup = document.getElementById('popup');
-    const popupMsg = document.getElementById('popup-message');
-
-    function showPopup(msg) {
-      popupMsg.textContent = msg;
-      popup.classList.add('show');
-    }
-    function closePopup() {
-      popup.classList.remove('show');
-    }
-
-    // Like and visit count with localStorage
-    const likeBtn = document.getElementById('like-btn');
-    const likeCountEl = document.getElementById('like-count');
-    const visitCountEl = document.getElementById('visit-count');
-
-    function updateLikeCount() {
-      const likes = parseInt(localStorage.getItem('likes')) || 0;
-      likeCountEl.textContent = `Hearts: ${likes}`;
-    }
-    function updateVisitCount() {
-      let visits = parseInt(localStorage.getItem('visits')) || 0;
-      visits++;
-      localStorage.setItem('visits', visits);
-      visitCountEl.textContent = `Visitors: ${visits}`;
-    }
-
-    likeBtn.addEventListener('click', () => {
-      let likes = parseInt(localStorage.getItem('likes')) || 0;
-      likes++;
-      localStorage.setItem('likes', likes);
-      updateLikeCount();
-    });
-
-    window.addEventListener('load', () => {
-      updateLikeCount();
-      updateVisitCount();
-    });
-  </script>
-</body>
-</html>
+    <section class="reveal" id="contact-section">
+      <h2>Contact Me</h2>
+      <div id="contact-list">
+        <div class="contact-card" onclick="window.open('mailto:vihanshahini@yahoo.com', '_blank')">
+          📧 Email<br/>
+          <a href="mailto:vihanshahini@yahoo.com">vihanshahini@yahoo.com</a>
+        </div>
+        <div class="contact-card" onclick="window.open('https://github.com/ItzShahVihan', '_blank')">
+          🐙 GitHub<br/>
+          <a href="https
