@@ -6,14 +6,28 @@
   <title>Vihan Shahini</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg-dark: #0f2027;
+      --bg-light: #f5f5f5;
+      --text-dark: #ffffff;
+      --text-light: #222;
+      --accent: #00c6ff;
+    }
+
     body {
       margin: 0;
       font-family: 'Space Grotesk', sans-serif;
-      background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
-      color: #ffffff;
+      background: linear-gradient(120deg, var(--bg-dark), #203a43, #2c5364);
+      color: var(--text-dark);
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      transition: background 0.5s, color 0.5s;
+    }
+
+    .light-mode {
+      background: var(--bg-light);
+      color: var(--text-light);
     }
 
     header {
@@ -29,13 +43,14 @@
       -webkit-text-fill-color: transparent;
     }
 
-    header p {
+    header .typed {
       font-size: 1.2rem;
       color: #ccc;
+      min-height: 1.5rem;
     }
 
     main {
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
       padding: 2rem;
     }
@@ -58,7 +73,7 @@
     }
 
     h2 {
-      color: #00c6ff;
+      color: var(--accent);
       font-size: 1.8rem;
       margin-bottom: 1rem;
     }
@@ -68,12 +83,91 @@
     }
 
     a {
-      color: #00c6ff;
+      color: var(--accent);
       text-decoration: none;
     }
 
     a:hover {
       text-decoration: underline;
+    }
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 15px var(--accent);
+      margin: 0 auto 1rem;
+      display: block;
+    }
+
+    .timeline {
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+    }
+
+    .timeline li {
+      margin-bottom: 1rem;
+    }
+
+    .toggle-theme {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      padding: 0.5rem 1rem;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    .teacher-btn {
+      background: #0072ff;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+
+    .teacher-btn.special {
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      font-weight: bold;
+      box-shadow: 0 0 15px #ff4b2b;
+    }
+
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 20px;
+      color: white;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      z-index: 1000;
+      text-align: center;
+      display: none;
+    }
+
+    .popup.show {
+      display: block;
+    }
+
+    .popup button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background: #00c6ff;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
     }
 
     footer {
@@ -86,9 +180,15 @@
   </style>
 </head>
 <body>
+  <button class="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+  <div class="popup" id="popup">
+    <div id="popup-message"></div>
+    <button onclick="closePopup()">Close</button>
+  </div>
   <header>
+    <img src="https://avatars.githubusercontent.com/u/your_github_user_id" alt="Profile" class="profile-pic">
     <h1>Vihan Shahini</h1>
-    <p>AI & Math Explorer · MIT Applicant · Life-Long Learner</p>
+    <div class="typed" id="typed"></div>
   </header>
 
   <main>
@@ -100,11 +200,33 @@
     </section>
 
     <section class="reveal">
+      <h2>My Life & Start in ML</h2>
+      <p>
+        I began exploring programming at the age of 15, starting with Python. Soon after, I got deeply interested in machine learning and data-driven problem solving. With the guidance of inspiring teachers and a passion for learning, I committed myself to projects, competitions, and the dream of attending MIT.
+      </p>
+      <p>I want to thank these incredible teachers for helping shape my journey:</p>
+      <button class="teacher-btn special" onclick="showPopup('Thank you Mr. Eisaei for guiding me into the world of Python and Machine Learning! You were the spark that lit the fire.')">Mr. Eisaei 🌟</button>
+      <button class="teacher-btn" onclick="showPopup('Thank you Mr. Naghinasab for sharpening my English skills and confidence!')">Mr. Naghinasab</button>
+      <button class="teacher-btn" onclick="showPopup('Thank you Mr. Ghazlikor for deepening my understanding and love for Math!')">Mr. Ghazlikor</button>
+      <button class="teacher-btn" onclick="showPopup('Thank you Mr. Lotfi for mentoring and supporting me on every step of the way!')">Mr. Lotfi</button>
+    </section>
+
+    <section class="reveal">
       <h2>Projects</h2>
       <ul>
-        <li><strong>Linear Algebra Translations:</strong> Persian translations of Prof. Gilbert Strang’s lectures.</li>
-        <li><strong>Soil & Crop ML:</strong> Predicting crop yield and soil health using real-world data.</li>
-        <li><strong>CO2 Air Modeling:</strong> ML model to predict CO2 levels in the air based on environment.</li>
+        <li><strong>Linear Algebra Translations:</strong> <a href="#">View Project</a></li>
+        <li><strong>Soil & Crop ML:</strong> <a href="#">Demo</a> | <a href="#">Code</a></li>
+        <li><strong>CO2 Air Modeling:</strong> <a href="#">GitHub Repo</a></li>
+      </ul>
+    </section>
+
+    <section class="reveal">
+      <h2>My Journey</h2>
+      <ul class="timeline">
+        <li><strong>2023:</strong> Started Python and ML</li>
+        <li><strong>2024:</strong> First ML project with real data</li>
+        <li><strong>2025:</strong> Translating MIT lectures</li>
+        <li><strong>2026:</strong> MIT? 🚀</li>
       </ul>
     </section>
 
@@ -113,6 +235,11 @@
       <p>Email: <a href="mailto:itzvihan.dev@gmail.com">itzvihan.dev@gmail.com</a></p>
       <p>GitHub: <a href="https://github.com/ItzShahVihan" target="_blank">github.com/ItzShahVihan</a></p>
       <p>LinkedIn: <a href="https://linkedin.com/in/vihan-shahini-1a286b24b" target="_blank">linkedin.com/in/vihan-shahini-1a286b24b</a></p>
+    </section>
+
+    <section class="reveal">
+      <h2>Download Resume</h2>
+      <p><a href="resume.pdf" download>📄 Click here to download my CV</a></p>
     </section>
   </main>
 
@@ -128,10 +255,43 @@
         }
       });
     });
+    document.querySelectorAll('.reveal').forEach(section => observer.observe(section));
 
-    document.querySelectorAll('.reveal').forEach((section) => {
-      observer.observe(section);
-    });
+    const words = ["AI Enthusiast", "ML Explorer", "MIT Applicant", "Lifelong Learner"];
+    let i = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typed = document.getElementById("typed");
+
+    function typeEffect() {
+      const current = words[i];
+      const visible = current.substring(0, charIndex);
+      typed.textContent = visible;
+
+      if (!isDeleting && charIndex < current.length) {
+        charIndex++;
+      } else if (isDeleting && charIndex > 0) {
+        charIndex--;
+      } else {
+        isDeleting = !isDeleting;
+        if (!isDeleting) i = (i + 1) % words.length;
+      }
+      setTimeout(typeEffect, isDeleting ? 50 : 120);
+    }
+    typeEffect();
+
+    function toggleTheme() {
+      document.body.classList.toggle("light-mode");
+    }
+
+    function showPopup(message) {
+      document.getElementById('popup-message').textContent = message;
+      document.getElementById('popup').classList.add('show');
+    }
+
+    function closePopup() {
+      document.getElementById('popup').classList.remove('show');
+    }
   </script>
 </body>
 </html>
