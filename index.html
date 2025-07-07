@@ -74,6 +74,19 @@
       --theme-name: "Sunset";
     }
     
+    /* MIT Theme */
+    .theme-mit {
+      --bg-primary: #8a0a0a; /* MIT Red */
+      --bg-secondary: #333333; /* MIT Gray */
+      --text-primary: #ffffff;
+      --text-secondary: #cccccc;
+      --accent-primary: #ffcc00; /* MIT Gold */
+      --accent-secondary: #ff9900;
+      --shadow: rgba(0, 0, 0, 0.4);
+      --card-bg: rgba(0, 0, 0, 0.3);
+      --theme-name: "MIT Pride";
+    }
+    
     * {
       margin: 0;
       padding: 0;
@@ -183,6 +196,7 @@
     #deep-theme { background: linear-gradient(135deg, #0c1e25, #142d3a); color: #e6f7ff; }
     #matrix-theme { background: linear-gradient(135deg, #000, #001a00); color: #00ff41; }
     #sunset-theme { background: linear-gradient(135deg, #ff6a00, #ee0979); color: #fff3f8; }
+    #mit-theme { background: linear-gradient(135deg, #8a0a0a, #333333); color: #ffcc00; }
     
     /* Language controls */
     #language-controls {
@@ -993,6 +1007,84 @@
       display: block;
     }
     
+    /* Why MIT section */
+    .mit-section {
+      background: linear-gradient(135deg, rgba(138, 10, 10, 0.1), rgba(51, 51, 51, 0.15));
+      border: 2px solid rgba(255, 204, 0, 0.2);
+    }
+    
+    .mit-section h2 {
+      color: #ffcc00;
+    }
+    
+    .mit-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 204, 0, 0.2);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #ffcc00;
+    }
+    
+    /* MIT Logo Easter Egg */
+    .mit-logo {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      font-size: 10rem;
+      color: #8a0a0a;
+      text-shadow: 0 0 20px rgba(255, 204, 0, 0.8);
+      z-index: 3000;
+      pointer-events: none;
+      opacity: 0;
+      transition: all 1s ease-out;
+    }
+    
+    .mit-logo.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2000;
+      display: none;
+    }
+    
+    /* AI Easter Egg */
+    .ai-easter-egg {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 10px 15px;
+      font-size: 0.9rem;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.5s ease;
+      z-index: 1000;
+      box-shadow: 0 5px 15px var(--shadow);
+    }
+    
+    .ai-easter-egg.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
     /* Responsive */
     @media (max-width: 768px) {
       header {
@@ -1094,6 +1186,7 @@
     <button id="deep-theme" class="theme-btn" title="Deep Learning"><i class="fas fa-brain"></i></button>
     <button id="matrix-theme" class="theme-btn" title="The Matrix"><i class="fas fa-terminal"></i></button>
     <button id="sunset-theme" class="theme-btn" title="Sunset"><i class="fas fa-sunset"></i></button>
+    <button id="mit-theme" class="theme-btn" title="MIT Pride"><i class="fas fa-graduation-cap"></i></button>
   </div>
   
   <div id="language-controls">
@@ -1111,6 +1204,13 @@
   
   <div id="particles-js"></div>
   <canvas class="code-rain"></canvas>
+  
+  <!-- Easter Egg Elements -->
+  <div class="mit-logo">MIT</div>
+  <div class="confetti" id="confetti"></div>
+  <div class="ai-easter-egg">
+    <i class="fas fa-robot"></i> AI is the future! Keep exploring!
+  </div>
   
   <!-- English Content -->
   <div class="lang-content active" id="en-content">
@@ -1189,6 +1289,33 @@
           </div>
         </section>
       </div>
+      
+      <!-- Why MIT? Section -->
+      <section class="reveal mit-section" id="why-mit-section">
+        <div class="mit-badge">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <h2><i class="fas fa-university"></i> Why MIT?</h2>
+        <p>
+          MIT isn't just a university—it's the global epicenter of technological innovation and the birthplace of modern AI. For me, MIT represents the pinnacle of academic excellence where I can pursue my passion for artificial intelligence to its fullest potential.
+        </p>
+        <p>
+          Here's why MIT is my dream destination:
+        </p>
+        <ul>
+          <li><strong>World-Class AI Leadership:</strong> MIT hosts the legendary Computer Science and Artificial Intelligence Laboratory (CSAIL), where pioneers like Tim Berners-Lee and Marvin Minsky have shaped the field.</li>
+          <li><strong>Exceptional Faculty:</strong> The opportunity to learn from visionaries like Lex Fridman and Patrick Winston who are pushing the boundaries of what AI can achieve.</li>
+          <li><strong>Unmatched Resources:</strong> Access to cutting-edge research facilities and collaborations with industry leaders that foster breakthrough innovations.</li>
+          <li><strong>Hands-On Philosophy:</strong> MIT's "Mens et Manus" (Mind and Hand) approach perfectly aligns with my belief in learning through practical application.</li>
+          <li><strong>AI Focus:</strong> As the #1 university for AI research globally, MIT provides the ideal environment to explore neural networks, reinforcement learning, and ethical AI development.</li>
+        </ul>
+        <p>
+          I'm confident that at MIT, I'll be challenged to grow beyond my limits and contribute meaningfully to the future of artificial intelligence.
+        </p>
+        <button class="teacher-btn" onclick="setTheme('theme-mit')">
+          <i class="fas fa-palette"></i> Activate MIT Theme!
+        </button>
+      </section>
       
       <section class="reveal" id="teachers-section">
         <h2><i class="fas fa-chalkboard-teacher"></i> My Inspiring Teachers</h2>
@@ -1434,6 +1561,33 @@
         </section>
       </div>
       
+      <!-- Why MIT? Section in Persian -->
+      <section class="reveal mit-section" id="why-mit-section-fa">
+        <div class="mit-badge">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <h2><i class="fas fa-university"></i> چرا MIT؟</h2>
+        <p>
+          MIT فقط یک دانشگاه نیست—مرکز جهانی نوآوری‌های تکنولوژیک و زادگاه هوش مصنوعی مدرن است. برای من، MIT نمایانگر اوج تعالی آکادمیک است که می‌توانم در آن اشتیاقم به هوش مصنوعی را به بالاترین پتانسیل برسانم.
+        </p>
+        <p>
+          دلایلی که MIT را به مقصد رویایی من تبدیل کرده:
+        </p>
+        <ul>
+          <li><strong>رهبری جهانی در هوش مصنوعی:</strong> MIT میزبان آزمایشگاه افسانه‌ای علوم کامپیوتر و هوش مصنوعی (CSAIL) است که پیشگامانی مانند تیم برنرز-لی و ماروین مینسکی در آن زمینه را شکل داده‌اند.</li>
+          <li><strong>اساتید استثنایی:</strong> فرصت یادگیری از چهره‌های برجسته‌ای مانند لکس فریدمن و پاتریک وینستون که مرزهای هوش مصنوعی را جابجا می‌کنند.</li>
+          <li><strong>منابع بی‌نظیر:</strong> دسترسی به امکانات تحقیقاتی پیشرفته و همکاری با رهبران صنعت که نوآوری‌های انقلابی را پرورش می‌دهند.</li>
+          <li><strong>فلسفه عملی:</strong> رویکرد "Mens et Manus" (ذهن و دست) MIT کاملاً با باور من به یادگیری از طریق کاربرد عملی همسو است.</li>
+          <li><strong>تمرکز بر هوش مصنوعی:</strong> به عنوان دانشگاه شماره یک جهان در تحقیقات هوش مصنوعی، MIT محیط ایده‌آلی برای کاوش شبکه‌های عصبی، یادگیری تقویتی و توسعه هوش مصنوعی اخلاقی فراهم می‌کند.</li>
+        </ul>
+        <p>
+          مطمئنم که در MIT، به چالش کشیده خواهم شد تا فراتر از محدودیت‌هایم رشد کنم و به شکلی معنادار به آینده هوش مصنوعی کمک کنم.
+        </p>
+        <button class="teacher-btn" onclick="setTheme('theme-mit')">
+          <i class="fas fa-palette"></i> فعال‌سازی تم MIT!
+        </button>
+      </section>
+      
       <section class="reveal" id="teachers-section-fa">
         <h2><i class="fas fa-chalkboard-teacher"></i> معلمان الهام‌بخش من</h2>
         <p>
@@ -1443,11 +1597,11 @@
           <button class="teacher-btn special" onclick="showPopup('با تشکر از آقای عیسایی برای راهنمایی من به دنیای پایتون و یادگیری ماشین! شما جرقه‌ای بودید که آتش را روشن کرد.')">
             <i class="fas fa-star"></i> آقای عیسایی 🌟
           </button>
-          <button class="teacher-btn" onclick="showPopup('با تشکر از آقای نقی نسب برای تقویت مهارت‌های زبان انگلیسی و اعتماد به نفس من!')">
-            <i class="fas fa-language"></i> آقای نقی نسب
+          <button class="teacher-btn" onclick="showPopup('با تشکر از آقای نقینسب برای تقویت مهارت‌های زبان انگلیسی و اعتماد به نفس من!')">
+            <i class="fas fa-language"></i> آقای نقینسب
           </button>
-          <button class="teacher-btn" onclick="showPopup('با تشکر از آقای قازلی کر برای تعمیق درک و علاقه من به ریاضیات!')">
-            <i class="fas fa-calculator"></i> آقای قازلی کر
+          <button class="teacher-btn" onclick="showPopup('با تشکر از آقای غضلی کر برای تعمیق درک و علاقه من به ریاضیات!')">
+            <i class="fas fa-calculator"></i> آقای غضلی کر
           </button>
           <button class="teacher-btn" onclick="showPopup('با تشکر از آقای لطفی برای راهنمایی و حمایت از من در هر مرحله از راه!')">
             <i class="fas fa-hands-helping"></i> آقای لطفی
@@ -1924,6 +2078,89 @@
     // Start the typewriter effect after page loads
     window.addEventListener('load', () => {
       setTimeout(typeWriter, 1000);
+    });
+    
+    // Easter Egg: Konami Code
+    const konamiCode = [
+      'ArrowUp', 'ArrowUp', 
+      'ArrowDown', 'ArrowDown', 
+      'ArrowLeft', 'ArrowRight', 
+      'ArrowLeft', 'ArrowRight', 
+      'b', 'a'
+    ];
+    let konamiIndex = 0;
+    
+    document.addEventListener('keydown', (e) => {
+      // Konami code check
+      if (e.key === konamiCode[konamiIndex]) {
+        konamiIndex++;
+        
+        if (konamiIndex === konamiCode.length) {
+          konamiIndex = 0;
+          document.querySelector('.mit-logo').classList.add('show');
+          setTimeout(() => {
+            document.querySelector('.mit-logo').classList.remove('show');
+          }, 3000);
+        }
+      } else {
+        konamiIndex = 0;
+      }
+      
+      // AI word detection
+      if (e.key.toLowerCase() === 'a' || e.key.toLowerCase() === 'i') {
+        const aiEasterEgg = document.querySelector('.ai-easter-egg');
+        aiEasterEgg.classList.add('show');
+        setTimeout(() => {
+          aiEasterEgg.classList.remove('show');
+        }, 3000);
+      }
+    });
+    
+    // Confetti effect for MIT theme
+    function createConfetti() {
+      const confettiContainer = document.getElementById('confetti');
+      confettiContainer.style.display = 'block';
+      
+      // Create confetti particles
+      for (let i = 0; i < 150; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'absolute';
+        confetti.style.width = '10px';
+        confetti.style.height = '10px';
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        confetti.style.left = `${Math.random() * 100}%`;
+        confetti.style.top = `${Math.random() * 100}%`;
+        confetti.style.borderRadius = '50%';
+        confetti.style.transform = `scale(${0.5 + Math.random()})`;
+        confetti.style.zIndex = '2000';
+        confetti.style.pointerEvents = 'none';
+        confettiContainer.appendChild(confetti);
+        
+        // Animate confetti
+        const animation = confetti.animate([
+          { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
+          { transform: `translate(${Math.random() * 200 - 100}px, ${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+        ], {
+          duration: 2000 + Math.random() * 3000,
+          easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)'
+        });
+        
+        // Remove confetti after animation
+        animation.onfinish = () => {
+          confetti.remove();
+        };
+      }
+      
+      // Hide container after animation
+      setTimeout(() => {
+        confettiContainer.style.display = 'none';
+        confettiContainer.innerHTML = '';
+      }, 5000);
+    }
+    
+    // Trigger confetti when MIT theme is activated
+    document.getElementById('mit-theme').addEventListener('click', () => {
+      setTimeout(createConfetti, 500);
     });
   </script>
 </body>
