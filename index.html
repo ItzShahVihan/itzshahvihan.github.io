@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Vihan Shahini</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg-dark: #0f2027;
@@ -28,22 +28,30 @@
       background: var(--bg-light);
       color: var(--text-light);
     }
+    /* New special theme */
+    .special-theme {
+      background: linear-gradient(135deg, #ff6a00, #ee0979);
+      color: #fff3f8;
+      font-family: 'Courier New', Courier, monospace;
+    }
     header {
-      padding: 3rem 1rem;
       text-align: center;
+      padding: 3rem 1rem;
     }
     header h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(to right, #00c6ff, #0072ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    header .typed {
-      font-size: 1.2rem;
-      color: #ccc;
-      min-height: 1.5rem;
-      height: 1.5rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: #00c6ff;
+      text-shadow:
+        0 0 5px #00c6ff,
+        0 0 10px #00c6ff,
+        0 0 20px #00ffff,
+        0 0 30px #00ffff,
+        0 0 40px #00ffff,
+        0 0 55px #00ffff,
+        0 0 75px #00ffff;
+      margin: 0;
     }
     main {
       max-width: 900px;
@@ -61,6 +69,7 @@
       transform: translateY(40px);
       transition: opacity 0.8s ease, transform 0.8s ease;
       text-align: left;
+      color: inherit;
     }
     section.visible {
       opacity: 1;
@@ -80,22 +89,6 @@
     }
     a:hover {
       text-decoration: underline;
-    }
-    .profile-pic {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 3px solid var(--accent);
-      box-shadow: 0 0 15px var(--accent);
-      margin: 0 auto 1rem;
-      display: block;
-    }
-    .timeline {
-      border-left: 3px solid var(--accent);
-      padding-left: 1rem;
-    }
-    .timeline li {
-      margin-bottom: 1rem;
     }
     #top-buttons {
       position: fixed;
@@ -181,6 +174,7 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
       user-select: none;
+      color: inherit;
     }
     #parents-section h2 {
       font-size: 2.2rem;
@@ -238,9 +232,7 @@
   </div>
 
   <header>
-    <img src="https://avatars.githubusercontent.com/u/your_github_user_id" alt="Profile" class="profile-pic" />
-    <h1 id="header-name">Vihan Shahini</h1>
-    <div class="typed" id="typed"></div>
+    <h1>Vihan Shahini</h1>
   </header>
 
   <main>
@@ -304,35 +296,6 @@
   </footer>
 
   <script>
-    // Typed effect
-    const words = ["AI Enthusiast", "ML Explorer", "MIT Applicant", "Lifelong Learner"];
-    let i = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typed = document.getElementById("typed");
-
-    function typeEffect() {
-      const current = words[i];
-      if (!isDeleting) {
-        typed.textContent = current.substring(0, charIndex + 1);
-        charIndex++;
-        if (charIndex === current.length) {
-          isDeleting = true;
-          setTimeout(typeEffect, 1500);
-          return;
-        }
-      } else {
-        typed.textContent = current.substring(0, charIndex - 1);
-        charIndex--;
-        if (charIndex === 0) {
-          isDeleting = false;
-          i = (i + 1) % words.length;
-        }
-      }
-      setTimeout(typeEffect, isDeleting ? 70 : 120);
-    }
-    typeEffect();
-
     // Reveal sections on scroll
     function revealSections() {
       const reveals = document.querySelectorAll("section");
@@ -358,10 +321,34 @@
       popup.classList.remove("show");
     }
 
-    // Toggle theme
+    // Toggle theme with Easter Egg
     const toggleBtn = document.getElementById("toggle-theme-btn");
+    let toggleCount = 0;
+    let easterEggUnlocked = false;
+
     toggleBtn.addEventListener("click", () => {
-      document.body.classList.toggle("light-mode");
+      if (easterEggUnlocked) {
+        // If special theme is active, toggle back to light/dark mode
+        if (document.body.classList.contains("special-theme")) {
+          document.body.classList.remove("special-theme");
+          document.body.classList.add("light-mode");
+        } else if (document.body.classList.contains("light-mode")) {
+          document.body.classList.remove("light-mode");
+        } else {
+          document.body.classList.add("light-mode");
+        }
+        return;
+      }
+
+      toggleCount++;
+      if (toggleCount === 5) {
+        easterEggUnlocked = true;
+        document.body.classList.add("special-theme");
+        showPopup("🎉 Congrats! You unlocked a new cool theme! 🎉");
+      } else {
+        // Normal toggle light mode
+        document.body.classList.toggle("light-mode");
+      }
     });
   </script>
 </body>
